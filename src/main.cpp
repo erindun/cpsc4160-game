@@ -11,6 +11,12 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
+const int FRAME_WIDTH = 25;
+const int FRAME_HEIGHT = 37;
+const int NUM_FRAMES = 8;
+
+const int SCALE_FACTOR = 5;
+
 SDL_Window *my_window = NULL;
 SDL_Renderer *my_renderer = NULL;
 SDL_Event input;
@@ -34,7 +40,8 @@ int main(int argc, char *argv[]) {
   my_SDL_init();
 
   SDL_Texture *my_texture = NULL;
-  SDL_Surface *temp = IMG_Load("../../../../src/Nico.png");
+  SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, 0);
+  SDL_Surface *temp = IMG_Load("../../../../src/cat_walking.png");
   my_texture = SDL_CreateTextureFromSurface(my_renderer, temp);
   if (my_texture == NULL) {
     std::cout << "error" << std::endl;
@@ -46,8 +53,8 @@ int main(int argc, char *argv[]) {
   SDL_Rect rect;
   rect.x = 0;
   rect.y = 150;
-  rect.w = 125;
-  rect.h = 185;
+  rect.w = FRAME_WIDTH * NUM_FRAMES * SCALE_FACTOR;
+  rect.h = FRAME_HEIGHT * SCALE_FACTOR;
 
   while (true) {
 
