@@ -11,8 +11,8 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
-const int FRAME_WIDTH = 25;
-const int FRAME_HEIGHT = 37;
+const int FRAME_WIDTH = 50;
+const int FRAME_HEIGHT = 74;
 const int NUM_FRAMES = 8;
 
 const int SCALE_FACTOR = 5;
@@ -50,16 +50,17 @@ int main(int argc, char *argv[]) {
 
   SDL_FreeSurface(temp);
 
-  SDL_Rect rect;
-  rect.x = 0;
-  rect.y = 150;
-  rect.w = FRAME_WIDTH * NUM_FRAMES * SCALE_FACTOR;
-  rect.h = FRAME_HEIGHT * SCALE_FACTOR;
 
   while (true) {
+    Uint32 ticks = SDL_GetTicks();
+    Uint32 sprite = (ticks / 100) % 8;
+
+    SDL_Rect srcrect = {sprite * FRAME_WIDTH, 0, FRAME_WIDTH, FRAME_HEIGHT};
+    SDL_Rect dstrect = {10, 10, FRAME_WIDTH, FRAME_HEIGHT};
+
 
     SDL_RenderClear(my_renderer);
-    SDL_RenderCopy(my_renderer, my_texture, NULL, &rect);
+    SDL_RenderCopy(my_renderer, my_texture, &srcrect, &dstrect);
     SDL_RenderPresent(my_renderer);
   }
 
