@@ -34,8 +34,7 @@ int main(int argc, char *argv[]) {
   my_SDL_init();
 
   SDL_Texture *my_texture = NULL;
-  SDL_Surface *temp = IMG_Load("C:\\Users\\garre\\source\\repos\\Cpsc4160Game\\src\\Nico.png");
-
+  SDL_Surface *temp = IMG_Load("../../../../src/Nico.png");
   my_texture = SDL_CreateTextureFromSurface(my_renderer, temp);
   if (my_texture == NULL) {
     std::cout << "error" << std::endl;
@@ -46,9 +45,9 @@ int main(int argc, char *argv[]) {
 
   SDL_Rect rect;
   rect.x = 0;
-  rect.y = 200;
-  rect.w = 150;
-  rect.h = 40;
+  rect.y = 150;
+  rect.w = 125;
+  rect.h = 185;
 
   while (true) {
 
