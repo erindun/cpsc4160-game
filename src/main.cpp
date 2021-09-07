@@ -1,10 +1,10 @@
 // CS 4160 - starter code written by Victor Zordan
 
-#include <iostream>
-#include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_timer.h>
+#include <iostream>
+#include <string>
 
 #include "game_engine.h"
 #include "game_object.h"

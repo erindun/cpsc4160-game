@@ -1,6 +1,6 @@
 #pragma once
-#include <string>
 #include <SDL2/SDL.h>
+#include <string>
 
 class GameObject {
 public:
@@ -12,7 +12,7 @@ public:
   void render();
   void quit();
 
-// private:
+  // private:
   SDL_Renderer *renderer;
   SDL_Texture *texture;
   SDL_Rect rect;

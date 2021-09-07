@@ -1,9 +1,9 @@
 #include "game_engine.h"
 
-#include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_timer.h>
+#include <iostream>
 
 GameEngine::GameEngine() {
   window = nullptr;
@@ -32,13 +32,9 @@ void GameEngine::init() {
   }
 }
 
-void GameEngine::update() {
+void GameEngine::update() {}
 
-}
-
-void GameEngine::render() {
-
-}
+void GameEngine::render() {}
 
 void GameEngine::quit() {
   SDL_DestroyRenderer(renderer);

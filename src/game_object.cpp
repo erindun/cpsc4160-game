@@ -1,9 +1,9 @@
 #include "game_object.h"
 
-#include <string>
-#include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <iostream>
+#include <string>
 
 GameObject::GameObject(SDL_Renderer *renderer)
     : renderer{renderer}, texture{nullptr}, rect{0, 0, 0, 0} {}

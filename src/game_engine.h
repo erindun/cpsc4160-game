@@ -13,7 +13,7 @@ public:
   void render();
   void quit();
 
-// private:
+  // private:
   SDL_Window *window;
   SDL_Renderer *renderer;
 };
