@@ -7,6 +7,7 @@
 #include <SDL2/SDL_timer.h>
 
 #include "game_engine.h"
+#include "game_object.h"
 
 const int FPS = 60;
 const int FRAME_DURATION = 1000 / FPS;
@@ -19,27 +20,12 @@ const int SCALE_FACTOR = 5;
 
 SDL_Event input;
 
-/** Loads an image into an SDL Texture. */
-SDL_Texture* load_image(const std::string &file, SDL_Renderer *renderer) {
-  SDL_Texture *texture = nullptr;
-  SDL_Surface *image = IMG_Load(file.c_str());
-  if (image == nullptr) {
-    std::cout << IMG_GetError() << std::endl;
-  } else {
-    texture = SDL_CreateTextureFromSurface(renderer, image);
-    if (texture == nullptr) {
-      std::cout << SDL_GetError() << std::endl;
-    }
-  }
-  SDL_FreeSurface(image);
-  return texture;
-}
-
 int main(int argc, char *argv[]) {
   auto engine = new GameEngine();
   engine->init();
 
-  auto texture = load_image("../../../../src/cat_walking.png", engine->renderer);
+  auto game_object = new GameObject(engine->renderer);
+  game_object->init("../../../../src/cat_walking.png");
 
   int translate = 0;
   int fps_counter = 0;
@@ -60,7 +46,7 @@ int main(int argc, char *argv[]) {
       translate = 0;
 
     SDL_RenderClear(engine->renderer);
-    SDL_RenderCopy(engine->renderer, texture, &srcrect, &dstrect);
+    SDL_RenderCopy(engine->renderer, game_object->texture, &srcrect, &dstrect);
     SDL_RenderPresent(engine->renderer);
 
     ++fps_counter;
