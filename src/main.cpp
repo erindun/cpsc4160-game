@@ -24,6 +24,22 @@ SDL_Window *my_window = NULL;
 SDL_Renderer *my_renderer = NULL;
 SDL_Event input;
 
+/** Loads an image into an SDL Texture. */
+SDL_Texture* load_image(const std::string &file, SDL_Renderer *renderer) {
+  SDL_Texture *texture = nullptr;
+  SDL_Surface *image = IMG_Load(file.c_str());
+  if (image == nullptr) {
+    std::cout << IMG_GetError() << std::endl;
+  } else {
+    texture = SDL_CreateTextureFromSurface(renderer, image);
+    if (texture == nullptr) {
+      std::cout << SDL_GetError() << std::endl;
+    }
+  }
+  SDL_FreeSurface(image);
+  return texture;
+}
+
 void my_SDL_init() {
 
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
@@ -42,16 +58,7 @@ void my_SDL_init() {
 int main(int argc, char *argv[]) {
   my_SDL_init();
 
-  SDL_Texture *my_texture = NULL;
-  SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, 0);
-  SDL_Surface *temp = IMG_Load("../../../../src/cat_walking.png");
-  my_texture = SDL_CreateTextureFromSurface(my_renderer, temp);
-  if (my_texture == NULL) {
-    std::cout << "error" << std::endl;
-    return 1;
-  }
-
-  SDL_FreeSurface(temp);
+  auto texture = load_image("../../../../src/cat_walking.png", my_renderer);
 
   int translate = 0;
   int fps_counter = 0;
@@ -72,7 +79,7 @@ int main(int argc, char *argv[]) {
       translate = 0;
 
     SDL_RenderClear(my_renderer);
-    SDL_RenderCopy(my_renderer, my_texture, &srcrect, &dstrect);
+    SDL_RenderCopy(my_renderer, texture, &srcrect, &dstrect);
     SDL_RenderPresent(my_renderer);
 
     ++fps_counter;
