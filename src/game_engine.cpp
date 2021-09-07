@@ -10,20 +10,13 @@ GameEngine::GameEngine() {
   renderer = nullptr;
 }
 
-GameEngine::~GameEngine() {
-  SDL_DestroyRenderer(renderer);
-  SDL_DestroyWindow(window);
-  IMG_Quit();
-  SDL_Quit();
-}
+GameEngine::~GameEngine() {}
 
 // TODO error handling
-bool GameEngine::init() {
-  auto success = true;
-
+void GameEngine::init() {
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
     std::cout << "Error initializing SDL: " << SDL_GetError() << std::endl;
-    success = false;
+    exit(1);
   }
 
   // Enable gpu_enhanced textures
@@ -35,12 +28,21 @@ bool GameEngine::init() {
   renderer = SDL_CreateRenderer(window, -1, 0);
 
   if (window == nullptr || renderer == nullptr) {
-    success = false;
+    exit(2);
   }
+}
 
-  return success;
+void GameEngine::update() {
+
 }
 
 void GameEngine::render() {
 
+}
+
+void GameEngine::quit() {
+  SDL_DestroyRenderer(renderer);
+  SDL_DestroyWindow(window);
+  IMG_Quit();
+  SDL_Quit();
 }

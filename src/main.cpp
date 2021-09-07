@@ -78,5 +78,6 @@ int main(int argc, char *argv[]) {
     }
   }
 
+  engine->quit();
   return 0;
 }

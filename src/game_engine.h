@@ -8,8 +8,10 @@ public:
 
   GameEngine();
   ~GameEngine();
-  bool init();
+  void init();
+  void update();
   void render();
+  void quit();
 
 // private:
   SDL_Window *window;
