@@ -1,13 +1,9 @@
-// CS 4160 - starter code written by Victor Zordan
-
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_timer.h>
-#include <iostream>
-#include <string>
-
 #include "game_engine.h"
 #include "game_object.h"
+
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_timer.h>
+#include <iostream>
 
 const int FPS = 60;
 const int FRAME_DURATION = 1000 / FPS;
@@ -16,13 +12,13 @@ int main(int argc, char *argv[]) {
   auto engine = new GameEngine();
   engine->init();
 
-  int fps_counter = 0;
-  int last_count_start_time = 0;
-  int current_fps = 0;
-  int this_duration = 0;
+  unsigned int fps_counter = 0;
+  unsigned int last_count_start_time = 0;
+  unsigned int current_fps = 0;
+  unsigned int this_duration = 0;
 
   while (true) {
-    Uint32 ticks = SDL_GetTicks();
+    auto ticks = SDL_GetTicks();
     engine->update();
     engine->render();
 
@@ -32,7 +28,6 @@ int main(int argc, char *argv[]) {
       current_fps = fps_counter;
       fps_counter = 0;
     }
-
     std::cout << current_fps << std::endl;
 
     this_duration = SDL_GetTicks() - ticks;

@@ -3,7 +3,6 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_timer.h>
 #include <iostream>
 
 GameEngine::GameEngine() : window{nullptr}, renderer{nullptr} {}
