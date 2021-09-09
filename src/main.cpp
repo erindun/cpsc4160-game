@@ -24,30 +24,19 @@ int main(int argc, char *argv[]) {
   auto engine = new GameEngine();
   engine->init();
 
-  auto game_object = new GameObject(engine->renderer);
-  game_object->init("../../../../src/cat_walking.png");
+  auto game_object = new GameObject();
+  game_object->init(engine->renderer, "../../../../src/cat_walking.png");
+  engine->register_object(game_object);
 
-  int translate = 0;
   int fps_counter = 0;
   int last_count_start_time = 0;
   int current_fps = 0;
   int this_duration = 0;
-  int frame_duration = 120;
 
   while (true) {
     Uint32 ticks = SDL_GetTicks();
-    Uint32 sprite = (ticks / 100) % 8;
-
-    SDL_Rect srcrect = {sprite * FRAME_WIDTH, 0, FRAME_WIDTH, FRAME_HEIGHT};
-    SDL_Rect dstrect = {translate, 200, FRAME_WIDTH, FRAME_HEIGHT};
-
-    translate += 2;
-    if (translate > GameEngine::SCREEN_WIDTH)
-      translate = 0;
-
-    SDL_RenderClear(engine->renderer);
-    SDL_RenderCopy(engine->renderer, game_object->texture, &srcrect, &dstrect);
-    SDL_RenderPresent(engine->renderer);
+    engine->update();
+    engine->render();
 
     ++fps_counter;
     if (ticks >= last_count_start_time + 1000) {

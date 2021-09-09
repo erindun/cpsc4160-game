@@ -12,6 +12,10 @@ GameEngine::GameEngine() {
 
 GameEngine::~GameEngine() {}
 
+void GameEngine::register_object(GameObject *obj) {
+  game_objects.push_back(obj);
+}
+
 // TODO error handling
 void GameEngine::init() {
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
@@ -32,9 +36,17 @@ void GameEngine::init() {
   }
 }
 
-void GameEngine::update() {}
+void GameEngine::update() {
+  for (auto obj : game_objects) {
+    obj->update();
+  }
+}
 
-void GameEngine::render() {}
+void GameEngine::render() {
+  for (auto obj : game_objects) {
+    obj->render();
+  }
+}
 
 void GameEngine::quit() {
   SDL_DestroyRenderer(renderer);
