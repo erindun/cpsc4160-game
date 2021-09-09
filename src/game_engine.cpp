@@ -33,19 +33,19 @@ void GameEngine::init() {
   init_sdl();
 
   auto cat = new GameObject();
-  cat->init("../../../../src/cat_walking.png", renderer, 40);
+  cat->init("../../../../assets/cat_walking.png", renderer, 40);
   game_objects.push_back(cat);
 
   auto fox = new GameObject();
-  fox->init("../../../../src/fox_walking.png", renderer, 140);
+  fox->init("../../../../assets/fox_walking.png", renderer, 140);
   game_objects.push_back(fox);
 
   auto raccoon = new GameObject();
-  raccoon->init("../../../../src/raccoon_walking.png", renderer, 240);
+  raccoon->init("../../../../assets/raccoon_walking.png", renderer, 240);
   game_objects.push_back(raccoon);
 
   auto deer = new GameObject();
-  deer->init("../../../../src/deer_walking.png", renderer, 340);
+  deer->init("../../../../assets/deer_walking.png", renderer, 340);
   game_objects.push_back(deer);
 }
 
