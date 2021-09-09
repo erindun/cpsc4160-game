@@ -34,8 +34,20 @@ void GameEngine::init() {
   init_sdl();
 
   auto cat = new GameObject();
-  cat->init("../../../../src/cat_walking.png", renderer, 200);
+  cat->init("../../../../src/cat_walking.png", renderer, 60);
   game_objects.push_back(cat);
+
+  auto fox = new GameObject();
+  fox->init("../../../../src/fox_walking.png", renderer, 160);
+  game_objects.push_back(fox);
+
+  auto raccoon = new GameObject();
+  raccoon->init("../../../../src/raccoon_walking.png", renderer, 260);
+  game_objects.push_back(raccoon);
+
+  auto deer = new GameObject();
+  deer->init("../../../../src/deer_walking.png", renderer, 360);
+  game_objects.push_back(deer);
 }
 
 void GameEngine::update() {
@@ -45,9 +57,11 @@ void GameEngine::update() {
 }
 
 void GameEngine::render() {
+  SDL_RenderClear(renderer);
   for (auto obj : game_objects) {
     obj->render();
   }
+  SDL_RenderPresent(renderer);
 }
 
 void GameEngine::quit() {
