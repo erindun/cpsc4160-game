@@ -5,10 +5,7 @@
 #include <SDL2/SDL_timer.h>
 #include <iostream>
 
-GameEngine::GameEngine() {
-  window = nullptr;
-  renderer = nullptr;
-}
+GameEngine::GameEngine() : window{nullptr}, renderer{nullptr} {}
 
 GameEngine::~GameEngine() {}
 
@@ -16,7 +13,7 @@ void GameEngine::register_object(GameObject *obj) {
   game_objects.push_back(obj);
 }
 
-// TODO error handling
+// TODO improve error handling/logging
 void GameEngine::init() {
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
     std::cout << "Error initializing SDL: " << SDL_GetError() << std::endl;
@@ -27,7 +24,7 @@ void GameEngine::init() {
   IMG_Init(IMG_INIT_PNG);
 
   window =
-      SDL_CreateWindow("my_game", SDL_WINDOWPOS_CENTERED,
+      SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED,
                        SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
   renderer = SDL_CreateRenderer(window, -1, 0);
 

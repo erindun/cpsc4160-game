@@ -12,14 +12,6 @@
 const int FPS = 60;
 const int FRAME_DURATION = 1000 / FPS;
 
-const int FRAME_WIDTH = 50;
-const int FRAME_HEIGHT = 74;
-const int NUM_FRAMES = 8;
-
-const int SCALE_FACTOR = 5;
-
-SDL_Event input;
-
 int main(int argc, char *argv[]) {
   auto engine = new GameEngine();
   engine->init();

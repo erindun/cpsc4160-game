@@ -7,8 +7,9 @@
 #include <string>
 
 GameObject::GameObject()
-    : renderer{nullptr}, texture{nullptr}, srcrect{0, 0, 0, 0},
-      dstrect{0, 0, 0, 0}, translate{0} {}
+    : renderer{nullptr}, texture{nullptr}, srcrect{0, 0, FRAME_WIDTH,
+                                                   FRAME_HEIGHT},
+      dstrect{0, 200, FRAME_WIDTH, FRAME_HEIGHT}, translate{0} {}
 
 GameObject::~GameObject() {}
 
@@ -28,18 +29,16 @@ void GameObject::init(SDL_Renderer *renderer, const std::string &file) {
 }
 
 void GameObject::update() {
-  Uint32 ticks = SDL_GetTicks();
-  int sprite = (ticks / 100) % 8;
-
-  srcrect = {sprite * FRAME_WIDTH, 0, FRAME_WIDTH, FRAME_HEIGHT};
-  dstrect = {translate, 200, FRAME_WIDTH, FRAME_HEIGHT};
-
-  translate += 2;
-  if (translate > GameEngine::SCREEN_WIDTH)
-    translate = 0;
+  dstrect.x += 2;
+  if (dstrect.x > GameEngine::SCREEN_WIDTH)
+    dstrect.x = 0;
 }
 
 void GameObject::render() {
+  Uint32 ticks = SDL_GetTicks();
+  int frame = (ticks / 100) % 8;
+  srcrect.x = frame * FRAME_WIDTH;
+
   SDL_RenderClear(renderer);
   SDL_RenderCopy(renderer, texture, &srcrect, &dstrect);
   SDL_RenderPresent(renderer);
