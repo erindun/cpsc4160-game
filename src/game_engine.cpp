@@ -34,7 +34,7 @@ void GameEngine::init() {
   init_sdl();
 
   auto cat = new GameObject();
-  cat->init(renderer, "../../../../src/cat_walking.png");
+  cat->init("../../../../src/cat_walking.png", renderer, 200);
   game_objects.push_back(cat);
 }
 

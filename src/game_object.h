@@ -11,7 +11,7 @@ public:
   GameObject();
   ~GameObject();
 
-  void init(SDL_Renderer *renderer, const std::string &file);
+  void init(const std::string &file, SDL_Renderer *renderer, int y_pos);
   void update();
   void render();
   void quit();

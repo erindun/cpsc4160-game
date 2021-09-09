@@ -9,12 +9,14 @@
 GameObject::GameObject()
     : renderer{nullptr}, texture{nullptr}, srcrect{0, 0, FRAME_WIDTH,
                                                    FRAME_HEIGHT},
-      dstrect{0, 200, FRAME_WIDTH, FRAME_HEIGHT}, translate{0} {}
+      dstrect{0, 0, FRAME_WIDTH, FRAME_HEIGHT}, translate{0} {}
 
 GameObject::~GameObject() {}
 
-void GameObject::init(SDL_Renderer *renderer, const std::string &file) {
+void GameObject::init(const std::string &file, SDL_Renderer *renderer,
+                      int y_pos) {
   this->renderer = renderer;
+  dstrect.y = y_pos;
 
   SDL_Surface *image = IMG_Load(file.c_str());
   if (image == nullptr) {
