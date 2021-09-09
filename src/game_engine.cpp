@@ -1,4 +1,5 @@
 #include "game_engine.h"
+#include "game_object.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -9,12 +10,8 @@ GameEngine::GameEngine() : window{nullptr}, renderer{nullptr} {}
 
 GameEngine::~GameEngine() {}
 
-void GameEngine::register_object(GameObject *obj) {
-  game_objects.push_back(obj);
-}
-
 // TODO improve error handling/logging
-void GameEngine::init() {
+void GameEngine::init_sdl() {
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
     std::cout << "Error initializing SDL: " << SDL_GetError() << std::endl;
     exit(1);
@@ -31,6 +28,14 @@ void GameEngine::init() {
   if (window == nullptr || renderer == nullptr) {
     exit(2);
   }
+}
+
+void GameEngine::init() {
+  init_sdl();
+
+  auto cat = new GameObject();
+  cat->init(renderer, "../../../../src/cat_walking.png");
+  game_objects.push_back(cat);
 }
 
 void GameEngine::update() {

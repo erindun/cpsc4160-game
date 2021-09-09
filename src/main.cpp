@@ -16,10 +16,6 @@ int main(int argc, char *argv[]) {
   auto engine = new GameEngine();
   engine->init();
 
-  auto game_object = new GameObject();
-  game_object->init(engine->renderer, "../../../../src/cat_walking.png");
-  engine->register_object(game_object);
-
   int fps_counter = 0;
   int last_count_start_time = 0;
   int current_fps = 0;

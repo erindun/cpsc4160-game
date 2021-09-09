@@ -16,7 +16,7 @@ public:
   void render();
   void quit();
 
-  // private:
+private:
   SDL_Renderer *renderer;
   SDL_Texture *texture;
   SDL_Rect srcrect;

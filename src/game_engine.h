@@ -11,13 +11,14 @@ public:
 
   GameEngine();
   ~GameEngine();
-  void register_object(GameObject *obj);
   void init();
   void update();
   void render();
   void quit();
 
-  // private:
+private:
+  void init_sdl();
+
   SDL_Window *window;
   SDL_Renderer *renderer;
   std::vector<GameObject *> game_objects;
