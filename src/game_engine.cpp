@@ -69,7 +69,7 @@ void GameEngine::render() {
 
   // Draw background
   SDL_Rect bg_rect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
-  SDL_SetRenderDrawColor(renderer, 95, 201, 98, 1);
+  SDL_SetRenderDrawColor(renderer, 127, 161, 134, 255);
   SDL_RenderFillRect(renderer, &bg_rect);
 
   for (auto obj : game_objects) {
