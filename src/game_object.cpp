@@ -37,7 +37,7 @@ void GameObject::update() {
 }
 
 void GameObject::render() {
-  auto frame = (SDL_GetTicks() / 100) % 8;
+  auto frame = (SDL_GetTicks() / 100) % NUM_FRAMES;
   srcrect.x = frame * FRAME_WIDTH;
   SDL_RenderCopy(renderer, texture, &srcrect, &dstrect);
 }
