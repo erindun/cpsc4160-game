@@ -12,14 +12,17 @@ public:
   GameEngine();
   ~GameEngine();
   void init();
+  void handle_input();
   void update();
   void render();
   void quit();
+  bool get_is_running();
 
 private:
   void init_sdl();
 
   SDL_Window *window;
   SDL_Renderer *renderer;
+  bool is_running;
   std::vector<GameObject *> game_objects;
 };

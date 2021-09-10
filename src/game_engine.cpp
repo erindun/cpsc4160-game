@@ -48,6 +48,15 @@ void GameEngine::init() {
   deer->init("../../../../assets/deer_walking.png", renderer, 340);
   game_objects.push_back(deer);
 }
+void GameEngine::handle_input() { SDL_Event e; 
+  SDL_PollEvent(&e);
+  if (e.type == SDL_QUIT)
+    is_running = false;
+
+  if (e.type == SDL_KEYDOWN)
+    if (e.key.keysym.sym == SDLK_ESCAPE)
+      is_running = false;
+}
 
 void GameEngine::update() {
   for (auto obj : game_objects) {
@@ -76,3 +85,5 @@ void GameEngine::quit() {
   IMG_Quit();
   SDL_Quit();
 }
+
+bool GameEngine::get_is_running() { return is_running; }

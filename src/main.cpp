@@ -17,8 +17,9 @@ int main(int argc, char *argv[]) {
   unsigned int current_fps = 0;
   unsigned int this_duration = 0;
 
-  while (true) {
+  while (engine->get_is_running()) {
     auto ticks = SDL_GetTicks();
+    engine->handle_input();
     engine->update();
     engine->render();
 
