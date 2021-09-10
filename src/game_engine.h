@@ -19,7 +19,7 @@ public:
   bool get_is_running();
 
 private:
-  void init_sdl();
+  void init_SDL();
 
   SDL_Window *window;
   SDL_Renderer *renderer;

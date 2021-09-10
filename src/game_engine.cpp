@@ -5,12 +5,13 @@
 #include <SDL2/SDL_image.h>
 #include <iostream>
 
-GameEngine::GameEngine() : window{nullptr}, renderer{nullptr} {}
+GameEngine::GameEngine()
+    : window{nullptr}, renderer{nullptr}, is_running{false} {}
 
 GameEngine::~GameEngine() {}
 
 // TODO improve error handling/logging
-void GameEngine::init_sdl() {
+void GameEngine::init_SDL() {
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
     std::cout << "Error initializing SDL: " << SDL_GetError() << std::endl;
     exit(1);
@@ -30,7 +31,8 @@ void GameEngine::init_sdl() {
 }
 
 void GameEngine::init() {
-  init_sdl();
+  init_SDL();
+  is_running = true;
 
   auto cat = new GameObject();
   cat->init("../../../../assets/cat_walking.png", renderer, 40);
@@ -48,6 +50,7 @@ void GameEngine::init() {
   deer->init("../../../../assets/deer_walking.png", renderer, 340);
   game_objects.push_back(deer);
 }
+
 void GameEngine::handle_input() { SDL_Event e; 
   SDL_PollEvent(&e);
   if (e.type == SDL_QUIT)
@@ -69,7 +72,7 @@ void GameEngine::render() {
 
   // Draw background
   SDL_Rect bg_rect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
-  SDL_SetRenderDrawColor(renderer, 127, 161, 134, 255);
+  SDL_SetRenderDrawColor(renderer, 157, 199, 159, 255);
   SDL_RenderFillRect(renderer, &bg_rect);
 
   for (auto obj : game_objects) {
