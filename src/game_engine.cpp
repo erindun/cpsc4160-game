@@ -51,7 +51,8 @@ void GameEngine::init() {
   game_objects.push_back(deer);
 }
 
-void GameEngine::handle_input() { SDL_Event e; 
+void GameEngine::handle_input() {
+  SDL_Event e;
   SDL_PollEvent(&e);
   if (e.type == SDL_QUIT)
     is_running = false;
