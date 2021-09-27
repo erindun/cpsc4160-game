@@ -3,7 +3,7 @@
 #include "game_object.h"
 #include "input/input_handler.h"
 #include <SDL2/SDL.h>
-#include <vector>
+#include <list>
 
 class GameEngine {
 public:
@@ -26,5 +26,5 @@ private:
   SDL_Renderer *renderer;
   bool is_running;
   InputHandler input_handler;
-  std::vector<GameObject *> game_objects;
+  std::list<GameObject *> game_objects;
 };
