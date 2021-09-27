@@ -9,7 +9,8 @@
 GameObject::GameObject()
     : renderer{nullptr}, texture{nullptr}, srcrect{0, 0, FRAME_WIDTH,
                                                    FRAME_HEIGHT},
-      dstrect{0, 0, FRAME_WIDTH, FRAME_HEIGHT}, translate{0} {}
+      dstrect{0, 0, FRAME_WIDTH, FRAME_HEIGHT}, translate{0}, position{Position{
+                                                                  0, 0}} {}
 
 GameObject::~GameObject() {}
 
