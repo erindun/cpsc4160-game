@@ -1,7 +1,7 @@
 #pragma once
-#include <list>
-#include "game_object.h"
+#include "../game_object.h"
 #include "command.h"
+#include <list>
 
 class InputHandler {
 public:
@@ -9,8 +9,8 @@ public:
   ~InputHandler();
 
   Command handle();
-  void register_obj(GameObject * obj);
-  void deregister_obj(GameObject * obj);
+  void register_obj(GameObject *obj);
+  void deregister_obj(GameObject *obj);
 
 private:
   std::list<GameObject *> observers;

@@ -1,6 +1,6 @@
 #include "game_engine.h"
-#include "command.h"
 #include "game_object.h"
+#include "input/command.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>

@@ -1,7 +1,7 @@
 #pragma once
+#include "position.h"
 #include <SDL2/SDL.h>
 #include <string>
-#include "position.h"
 
 class GameObject {
 public:

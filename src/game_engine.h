@@ -1,7 +1,7 @@
 #pragma once
 
 #include "game_object.h"
-#include "input_handler.h"
+#include "input/input_handler.h"
 #include <SDL2/SDL.h>
 #include <vector>
 
