@@ -1,6 +1,7 @@
 #pragma once
 
 #include "game_object.h"
+#include "input_handler.h"
 #include <SDL2/SDL.h>
 #include <vector>
 
@@ -24,5 +25,6 @@ private:
   SDL_Window *window;
   SDL_Renderer *renderer;
   bool is_running;
+  InputHandler input_handler;
   std::vector<GameObject *> game_objects;
 };

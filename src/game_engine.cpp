@@ -1,4 +1,5 @@
 #include "game_engine.h"
+#include "command.h"
 #include "game_object.h"
 
 #include <SDL2/SDL.h>
@@ -53,17 +54,8 @@ void GameEngine::init() {
 }
 
 void GameEngine::handle_input() {
-  SDL_Event e;
-  SDL_PollEvent(&e);
-  if (e.type == SDL_QUIT)
+  if (input_handler.handle() == Command::quit)
     is_running = false;
-
-  if (e.type == SDL_KEYDOWN) {
-    switch (e.key.keysym.sym) {
-    case SDLK_ESCAPE:
-      is_running = false;
-    }
-  }
 }
 
 void GameEngine::update() {
