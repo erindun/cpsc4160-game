@@ -14,9 +14,9 @@ GameObject::GameObject()
 GameObject::~GameObject() {}
 
 void GameObject::init(const std::string &file, SDL_Renderer *renderer,
-                      int y_pos) {
+                      Position position) {
   this->renderer = renderer;
-  dstrect.y = y_pos;
+  this->position = position;
 
   SDL_Surface *image = IMG_Load(file.c_str());
   if (image == nullptr) {
@@ -31,9 +31,12 @@ void GameObject::init(const std::string &file, SDL_Renderer *renderer,
 }
 
 void GameObject::update() {
-  dstrect.x += 2;
-  if (dstrect.x > GameEngine::SCREEN_WIDTH)
-    dstrect.x = 0;
+  position.x += 2;
+  if (position.x > GameEngine::SCREEN_WIDTH)
+    position.x = 0;
+
+  dstrect.x = position.x;
+  dstrect.y = position.y;
 }
 
 void GameObject::render() {

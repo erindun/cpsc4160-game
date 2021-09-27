@@ -34,20 +34,21 @@ void GameEngine::init() {
   init_SDL();
   is_running = true;
 
-  auto cat = new GameObject();
-  cat->init("../../../../assets/cat_walking.png", renderer, 40);
-  game_objects.push_back(cat);
+  auto player = new GameObject();
+  player->init("../../../../assets/cat_walking.png", renderer, Position{0, 40});
+  game_objects.push_back(player);
 
   auto fox = new GameObject();
-  fox->init("../../../../assets/fox_walking.png", renderer, 140);
+  fox->init("../../../../assets/fox_walking.png", renderer, Position{0, 140});
   game_objects.push_back(fox);
 
   auto raccoon = new GameObject();
-  raccoon->init("../../../../assets/raccoon_walking.png", renderer, 240);
+  raccoon->init("../../../../assets/raccoon_walking.png", renderer,
+                Position{0, 240});
   game_objects.push_back(raccoon);
 
   auto deer = new GameObject();
-  deer->init("../../../../assets/deer_walking.png", renderer, 340);
+  deer->init("../../../../assets/deer_walking.png", renderer, Position{0, 340});
   game_objects.push_back(deer);
 }
 
@@ -57,9 +58,12 @@ void GameEngine::handle_input() {
   if (e.type == SDL_QUIT)
     is_running = false;
 
-  if (e.type == SDL_KEYDOWN)
-    if (e.key.keysym.sym == SDLK_ESCAPE)
+  if (e.type == SDL_KEYDOWN) {
+    switch (e.key.keysym.sym) {
+    case SDLK_ESCAPE:
       is_running = false;
+    }
+  }
 }
 
 void GameEngine::update() {

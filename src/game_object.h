@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL2/SDL.h>
 #include <string>
+#include "position.h"
 
 class GameObject {
 public:
@@ -11,10 +12,12 @@ public:
   GameObject();
   ~GameObject();
 
-  void init(const std::string &file, SDL_Renderer *renderer, int y_pos);
+  void init(const std::string &file, SDL_Renderer *renderer, Position position);
   void update();
   void render();
   void quit();
+
+  Position position;
 
 private:
   SDL_Renderer *renderer;
