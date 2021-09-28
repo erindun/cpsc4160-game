@@ -37,4 +37,5 @@ static const Vec2 up = Vec2{0, -1};
 static const Vec2 down = Vec2{0, 1};
 static const Vec2 left = Vec2{-1, 0};
 static const Vec2 right = Vec2{1, 0};
+static const Vec2 zero = Vec2{0, 0};
 }; // namespace vec2

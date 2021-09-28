@@ -7,45 +7,18 @@
 #include <string>
 using vec2::Vec2;
 
-Character::Character()
-    : renderer{nullptr}, texture{nullptr}, srcrect{0, 0, FRAME_WIDTH,
-                                                   FRAME_HEIGHT},
-      dstrect{0, 0, FRAME_WIDTH, FRAME_HEIGHT}, position{Vec2{
-                                                                  0, 0}} {}
+Character::Character(Sprite *sprite, Vec2 position)
+    : sprite{sprite}, position{position}, direction{vec2::down},
+      state{CharacterState::idle} {}
 
 Character::~Character() {}
 
-void Character::init(const std::string &file, SDL_Renderer *renderer,
-                     Vec2 position) {
-  this->renderer = renderer;
-  this->position = position;
+void Character::update() { sprite->update(position); }
 
-  SDL_Surface *image = IMG_Load(file.c_str());
-  if (image == nullptr) {
-    std::cout << IMG_GetError() << std::endl;
-  } else {
-    texture = SDL_CreateTextureFromSurface(renderer, image);
-    if (texture == nullptr) {
-      std::cout << SDL_GetError() << std::endl;
-    }
-  }
-  SDL_FreeSurface(image);
-}
-
-void Character::update() {
-  dstrect.x = position.x;
-  dstrect.y = position.y;
-}
-
-void Character::render() {
-  auto frame = (SDL_GetTicks() / 100) % NUM_FRAMES;
-  srcrect.x = frame * FRAME_WIDTH;
-  SDL_RenderCopy(renderer, texture, &srcrect, &dstrect);
-}
-
-void Character::destroy() {}
+void Character::render() { sprite->render(); }
 
 void Character::move(Vec2 direction) {
   this->direction = direction;
+  state = CharacterState::moving;
   position += direction * MOVE_SPEED;
 }
