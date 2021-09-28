@@ -5,17 +5,18 @@
 #include <SDL2/SDL_image.h>
 #include <iostream>
 #include <string>
+using vec2::Vec2;
 
 Character::Character()
     : renderer{nullptr}, texture{nullptr}, srcrect{0, 0, FRAME_WIDTH,
                                                    FRAME_HEIGHT},
-      dstrect{0, 0, FRAME_WIDTH, FRAME_HEIGHT}, translate{0}, position{Position{
+      dstrect{0, 0, FRAME_WIDTH, FRAME_HEIGHT}, translate{0}, position{Vec2{
                                                                   0, 0}} {}
 
 Character::~Character() {}
 
 void Character::init(const std::string &file, SDL_Renderer *renderer,
-                     Position position) {
+                     Vec2 position) {
   this->renderer = renderer;
   this->position = position;
 

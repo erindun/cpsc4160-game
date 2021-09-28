@@ -1,18 +1,19 @@
 #include "player.h"
-#include "direction.h"
+#include "vec2.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
+using vec2::Vec2;
 
 Player::Player()
     : renderer{nullptr}, texture{nullptr}, srcrect{0, 0, FRAME_WIDTH,
                                                    FRAME_HEIGHT},
-      dstrect{0, 0, FRAME_WIDTH, FRAME_HEIGHT}, position{Position{0, 0}} {}
+      dstrect{0, 0, FRAME_WIDTH, FRAME_HEIGHT}, position{Vec2{0, 0}} {}
 
 Player::~Player() {}
 
 void Player::init(const std::string &file, SDL_Renderer *renderer,
-                  Position position) {
+                  Vec2 position) {
   this->renderer = renderer;
   this->position = position;
 
@@ -31,22 +32,22 @@ void Player::init(const std::string &file, SDL_Renderer *renderer,
 void Player::move(Direction direction) {
   switch (direction) {
   case Direction::up:
-    position.y -= Player::MOVE_SPEED;
+    position += vec2::up * MOVE_SPEED;
     break;
   case Direction::down:
-    position.y += Player::MOVE_SPEED;
+    position += vec2::down * MOVE_SPEED;
     break;
   case Direction::left:
-    position.x -= Player::MOVE_SPEED;
+    position += vec2::left * MOVE_SPEED;
     break;
   case Direction::right:
-    position.x += Player::MOVE_SPEED;
+    position += vec2::right * MOVE_SPEED;
     break;
   }
 }
 
 void Player::destroy() {}
-void Player::update() { 
+void Player::update() {
   dstrect.x = position.x;
   dstrect.y = position.y;
 }

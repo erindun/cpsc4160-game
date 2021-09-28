@@ -1,6 +1,6 @@
 #pragma once
 #include "game_object.h"
-#include "position.h"
+#include "vec2.h"
 #include <SDL2/SDL.h>
 #include <string>
 
@@ -13,11 +13,11 @@ public:
   Character();
   ~Character();
 
-  void init(const std::string &file, SDL_Renderer *renderer, Position position);
+  void init(const std::string &file, SDL_Renderer *renderer, vec2::Vec2 position);
   void update() override;
   void render() override;
   void destroy() override;
-  Position position;
+  vec2::Vec2 position;
 
 private:
   SDL_Renderer *renderer;

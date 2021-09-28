@@ -6,6 +6,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
+using vec2::Vec2;
 
 GameEngine::GameEngine()
     : window{nullptr}, renderer{nullptr}, player{nullptr}, is_running{false} {}
@@ -37,20 +38,20 @@ void GameEngine::init() {
   is_running = true;
 
   player = new Player();
-  player->init("../../../../assets/cat_walking.png", renderer, Position{0, 40});
+  player->init("../../../../assets/cat_walking.png", renderer, Vec2{0, 40});
   game_objects.push_back(player);
 
   auto fox = new Character();
-  fox->init("../../../../assets/fox_walking.png", renderer, Position{0, 140});
+  fox->init("../../../../assets/fox_walking.png", renderer, Vec2{0, 140});
   game_objects.push_back(fox);
 
   auto raccoon = new Character();
   raccoon->init("../../../../assets/raccoon_walking.png", renderer,
-                Position{0, 240});
+                Vec2{0, 240});
   game_objects.push_back(raccoon);
 
   auto deer = new Character();
-  deer->init("../../../../assets/deer_walking.png", renderer, Position{0, 340});
+  deer->init("../../../../assets/deer_walking.png", renderer, Vec2{0, 340});
   game_objects.push_back(deer);
 }
 

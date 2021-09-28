@@ -1,7 +1,7 @@
 #pragma once
 #include "game_object.h"
 #include "direction.h"
-#include "position.h"
+#include "vec2.h"
 #include <SDL2/SDL.h>
 #include <string>
 
@@ -15,7 +15,7 @@ public:
   Player();
   ~Player();
 
-  void init(const std::string &file, SDL_Renderer *renderer, Position position);
+  void init(const std::string &file, SDL_Renderer *renderer, vec2::Vec2 position);
   void update() override;
   void render() override;
   void destroy() override;
@@ -26,5 +26,5 @@ private:
   SDL_Texture *texture;
   SDL_Rect srcrect;
   SDL_Rect dstrect;
-  Position position;
+  vec2::Vec2 position;
 };
