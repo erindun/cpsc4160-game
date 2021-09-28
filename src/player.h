@@ -1,6 +1,6 @@
 #pragma once
 #include "game_object.h"
-#include "movement.h"
+#include "direction.h"
 #include "position.h"
 #include <SDL2/SDL.h>
 #include <string>
@@ -19,7 +19,7 @@ public:
   void update() override;
   void render() override;
   void destroy() override;
-  void move(MoveDirection direction);
+  void move(Direction direction);
 
 private:
   SDL_Renderer *renderer;

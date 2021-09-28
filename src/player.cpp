@@ -1,5 +1,5 @@
 #include "player.h"
-#include "movement.h"
+#include "direction.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
@@ -28,30 +28,25 @@ void Player::init(const std::string &file, SDL_Renderer *renderer,
   SDL_FreeSurface(image);
 }
 
-void Player::move(MoveDirection direction) {
+void Player::move(Direction direction) {
   switch (direction) {
-  case MoveDirection::up:
+  case Direction::up:
     position.y -= Player::MOVE_SPEED;
     break;
-  case MoveDirection::down:
+  case Direction::down:
     position.y += Player::MOVE_SPEED;
     break;
-  case MoveDirection::left:
+  case Direction::left:
     position.x -= Player::MOVE_SPEED;
     break;
-  case MoveDirection::right:
+  case Direction::right:
     position.x += Player::MOVE_SPEED;
-    std::cout << position.x;
     break;
   }
 }
 
 void Player::destroy() {}
 void Player::update() { 
-  //position.x += 2;
-  //if (position.x > GameEngine::SCREEN_WIDTH)
-  //  position.x = 0;
-
   dstrect.x = position.x;
   dstrect.y = position.y;
 }

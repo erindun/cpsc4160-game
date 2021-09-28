@@ -39,7 +39,6 @@ void GameEngine::init() {
   player = new Player();
   player->init("../../../../assets/cat_walking.png", renderer, Position{0, 40});
   game_objects.push_back(player);
-  input_handler.register_obj(player);
 
   auto fox = new Character();
   fox->init("../../../../assets/fox_walking.png", renderer, Position{0, 140});
@@ -56,19 +55,14 @@ void GameEngine::init() {
 }
 
 void GameEngine::handle_input() {
-  auto command = input_handler.handle(*player);
-  //if (command == Command::quit)
-  //  is_running = false;
-  //else if (command != Command::none)
-  //  input_handler.control()
+  auto command = input_handler.handle(*player, is_running);
   if (command)
     command->execute();
 }
 
 void GameEngine::update() {
-  for (auto obj : game_objects) {
+  for (auto obj : game_objects)
     obj->update();
-  }
 }
 
 void GameEngine::render() {
@@ -79,9 +73,8 @@ void GameEngine::render() {
   SDL_SetRenderDrawColor(renderer, 157, 199, 159, 255);
   SDL_RenderFillRect(renderer, &bg_rect);
 
-  for (auto obj : game_objects) {
+  for (auto obj : game_objects)
     obj->render();
-  }
 
   SDL_RenderPresent(renderer);
 }

@@ -8,10 +8,5 @@ public:
   InputHandler();
   ~InputHandler();
 
-  Command *handle(Player &player);
-  void register_obj(Player *obj);
-  void deregister_obj(Player *obj);
-
-private:
-  std::list<GameObject *> observers;
+  Command *handle(Player &player, bool &is_running);
 };
