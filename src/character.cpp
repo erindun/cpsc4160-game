@@ -1,4 +1,4 @@
-#include "game_object.h"
+#include "character.h"
 #include "game_engine.h"
 #include "input/input_handler.h"
 #include <SDL2/SDL.h>
@@ -6,16 +6,16 @@
 #include <iostream>
 #include <string>
 
-GameObject::GameObject()
+Character::Character()
     : renderer{nullptr}, texture{nullptr}, srcrect{0, 0, FRAME_WIDTH,
                                                    FRAME_HEIGHT},
       dstrect{0, 0, FRAME_WIDTH, FRAME_HEIGHT}, translate{0}, position{Position{
                                                                   0, 0}} {}
 
-GameObject::~GameObject() {}
+Character::~Character() {}
 
-void GameObject::init(const std::string &file, SDL_Renderer *renderer,
-                      Position position) {
+void Character::init(const std::string &file, SDL_Renderer *renderer,
+                     Position position) {
   this->renderer = renderer;
   this->position = position;
 
@@ -31,7 +31,7 @@ void GameObject::init(const std::string &file, SDL_Renderer *renderer,
   SDL_FreeSurface(image);
 }
 
-void GameObject::update() {
+void Character::update() {
   position.x += 2;
   if (position.x > GameEngine::SCREEN_WIDTH)
     position.x = 0;
@@ -40,10 +40,10 @@ void GameObject::update() {
   dstrect.y = position.y;
 }
 
-void GameObject::render() {
+void Character::render() {
   auto frame = (SDL_GetTicks() / 100) % NUM_FRAMES;
   srcrect.x = frame * FRAME_WIDTH;
   SDL_RenderCopy(renderer, texture, &srcrect, &dstrect);
 }
 
-void GameObject::quit() {}
+void Character::destroy() {}

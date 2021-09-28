@@ -1,6 +1,7 @@
 #include "game_engine.h"
 #include "game_object.h"
 #include "input/command.h"
+#include "character.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -35,20 +36,22 @@ void GameEngine::init() {
   init_SDL();
   is_running = true;
 
-  auto player = new GameObject();
+  auto player = new Character();
+  player->init("../../../../assets/cat_walking.png",
+                                  renderer, Position{0, 40});
   player->init("../../../../assets/cat_walking.png", renderer, Position{0, 40});
   game_objects.push_back(player);
 
-  auto fox = new GameObject();
+  auto fox = new Character();
   fox->init("../../../../assets/fox_walking.png", renderer, Position{0, 140});
   game_objects.push_back(fox);
 
-  auto raccoon = new GameObject();
+  auto raccoon = new Character();
   raccoon->init("../../../../assets/raccoon_walking.png", renderer,
                 Position{0, 240});
   game_objects.push_back(raccoon);
 
-  auto deer = new GameObject();
+  auto deer = new Character();
   deer->init("../../../../assets/deer_walking.png", renderer, Position{0, 340});
   game_objects.push_back(deer);
 }

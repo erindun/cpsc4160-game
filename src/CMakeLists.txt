@@ -7,7 +7,7 @@ find_package(SDL2 CONFIG REQUIRED)
 find_package(sdl2-image CONFIG REQUIRED)
 
 # Add source to this project's executable.
-add_executable (main "main.cpp"  "game_engine.h" "game_engine.cpp" "game_object.h" "game_object.cpp" "position.h" "input/input_handler.h" "input/input_handler.cpp" "input/command.h")
+add_executable (main "main.cpp"  "game_engine.h" "game_engine.cpp" "character.h" "character.cpp" "position.h" "input/input_handler.h" "input/input_handler.cpp" "input/command.h"  "game_object.h")
 
 target_link_libraries(main PRIVATE SDL2::SDL2 SDL2::SDL2main SDL2::SDL2_image)
 

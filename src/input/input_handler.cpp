@@ -1,6 +1,7 @@
 #include "input_handler.h"
 #include "../game_object.h"
 #include "command.h"
+#include <SDL2/SDL.h>
 
 InputHandler::InputHandler() {}
 InputHandler::~InputHandler() {}
