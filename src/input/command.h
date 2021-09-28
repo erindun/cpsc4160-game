@@ -1,5 +1,20 @@
 #pragma once
+#include "../player.h"
+#include "../movement.h"
 
-/// Commands that may be sent to the game
-/// engine or to game objects via player input.
-enum class Command { quit, move_up, move_down, move_left, move_right, none };
+class Command {
+public:
+  virtual ~Command() {}
+  virtual void execute() = 0;
+};
+
+class MoveCommand : public Command {
+public:
+  MoveCommand(Player &player, MoveDirection direction)
+      : player{player}, direction{direction} {}
+  void execute() override { player.move(direction); }
+
+private:
+  Player &player;
+  MoveDirection direction;
+};

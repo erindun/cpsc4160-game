@@ -22,6 +22,7 @@ public:
 private:
   void init_SDL();
 
+  Player *player;
   SDL_Window *window;
   SDL_Renderer *renderer;
   bool is_running;

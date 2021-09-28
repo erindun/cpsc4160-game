@@ -8,7 +8,7 @@
 #include <iostream>
 
 GameEngine::GameEngine()
-    : window{nullptr}, renderer{nullptr}, is_running{false} {}
+    : window{nullptr}, renderer{nullptr}, player{nullptr}, is_running{false} {}
 
 GameEngine::~GameEngine() {}
 
@@ -36,10 +36,10 @@ void GameEngine::init() {
   init_SDL();
   is_running = true;
 
-  auto player = new Player();
-  player->init("../../../../assets/cat_walking.png", renderer, Position{0, 40});
+  player = new Player();
   player->init("../../../../assets/cat_walking.png", renderer, Position{0, 40});
   game_objects.push_back(player);
+  input_handler.register_obj(player);
 
   auto fox = new Character();
   fox->init("../../../../assets/fox_walking.png", renderer, Position{0, 140});
@@ -56,8 +56,13 @@ void GameEngine::init() {
 }
 
 void GameEngine::handle_input() {
-  if (input_handler.handle() == Command::quit)
-    is_running = false;
+  auto command = input_handler.handle(*player);
+  //if (command == Command::quit)
+  //  is_running = false;
+  //else if (command != Command::none)
+  //  input_handler.control()
+  if (command)
+    command->execute();
 }
 
 void GameEngine::update() {

@@ -1,5 +1,5 @@
 #pragma once
-#include "../game_object.h"
+#include "../player.h"
 #include "command.h"
 #include <list>
 
@@ -8,9 +8,9 @@ public:
   InputHandler();
   ~InputHandler();
 
-  Command handle();
-  void register_obj(GameObject *obj);
-  void deregister_obj(GameObject *obj);
+  Command *handle(Player &player);
+  void register_obj(Player *obj);
+  void deregister_obj(Player *obj);
 
 private:
   std::list<GameObject *> observers;

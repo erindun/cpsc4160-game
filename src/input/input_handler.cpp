@@ -1,48 +1,47 @@
 #include "input_handler.h"
-#include "../game_object.h"
+#include "../player.h"
 #include "command.h"
 #include <SDL2/SDL.h>
 
 InputHandler::InputHandler() {}
 InputHandler::~InputHandler() {}
 
-Command InputHandler::handle() {
+Command *InputHandler::handle(Player &player) {
   SDL_Event e;
   SDL_PollEvent(&e);
   switch (e.type) {
   case SDL_QUIT:
-    return Command::quit;
+    break;
 
   case SDL_KEYDOWN: {
     switch (e.key.keysym.sym) {
     case SDLK_ESCAPE:
-      return Command::quit;
+      break;
 
     case SDLK_UP:
     case SDLK_w:
-      return Command::move_up;
+      return new MoveCommand(player, MoveDirection::up);
 
     case SDLK_DOWN:
     case SDLK_s:
-      return Command::move_down;
+      return new MoveCommand(player, MoveDirection::down);
 
     case SDLK_LEFT:
     case SDLK_a:
-      return Command::move_left;
+      return new MoveCommand(player, MoveDirection::left);
 
     case SDLK_RIGHT:
     case SDLK_d:
-      return Command::move_right;
-
-    default:
-      return Command::none;
+      return new MoveCommand(player, MoveDirection::right);
     }
   }
 
   default:
-    return Command::none;
+    break;
   }
+
+  return nullptr;
 }
 
-void InputHandler::register_obj(GameObject *obj) { observers.push_back(obj); }
-void InputHandler::deregister_obj(GameObject *obj) { observers.remove(obj); }
+void InputHandler::register_obj(Player *obj) { observers.push_back(obj); }
+void InputHandler::deregister_obj(Player *obj) { observers.remove(obj); }

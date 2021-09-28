@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
       current_fps = fps_counter;
       fps_counter = 0;
     }
-    std::cout << current_fps << std::endl;
+    //std::cout << current_fps << std::endl;
 
     this_duration = SDL_GetTicks() - ticks;
     if (this_duration < FRAME_DURATION) {
