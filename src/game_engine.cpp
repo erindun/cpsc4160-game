@@ -1,8 +1,8 @@
 #include "game_engine.h"
+#include "character.h"
 #include "game_object.h"
 #include "input/command.h"
-#include "character.h"
-
+#include "player.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
@@ -36,9 +36,8 @@ void GameEngine::init() {
   init_SDL();
   is_running = true;
 
-  auto player = new Character();
-  player->init("../../../../assets/cat_walking.png",
-                                  renderer, Position{0, 40});
+  auto player = new Player();
+  player->init("../../../../assets/cat_walking.png", renderer, Position{0, 40});
   player->init("../../../../assets/cat_walking.png", renderer, Position{0, 40});
   game_objects.push_back(player);
 
