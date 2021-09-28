@@ -1,5 +1,6 @@
 #pragma once
 #include "game_object.h"
+#include "direction.h"
 #include "vec2.h"
 #include <SDL2/SDL.h>
 #include <string>
@@ -9,6 +10,7 @@ public:
   static const int FRAME_WIDTH = 50;
   static const int FRAME_HEIGHT = 74;
   static const int NUM_FRAMES = 8;
+  static const int MOVE_SPEED = 4;
 
   Character();
   ~Character();
@@ -17,6 +19,7 @@ public:
   void update() override;
   void render() override;
   void destroy() override;
+  void move(Direction direction);
   vec2::Vec2 position;
 
 private:
@@ -24,5 +27,4 @@ private:
   SDL_Texture *texture;
   SDL_Rect srcrect;
   SDL_Rect dstrect;
-  int translate;
 };

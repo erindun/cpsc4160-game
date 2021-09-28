@@ -37,7 +37,7 @@ void GameEngine::init() {
   init_SDL();
   is_running = true;
 
-  player = new Player();
+  player = new Character();
   player->init("../../../../assets/cat_walking.png", renderer, Vec2{0, 40});
   game_objects.push_back(player);
 

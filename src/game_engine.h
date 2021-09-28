@@ -1,5 +1,6 @@
 #pragma once
 
+#include "character.h"
 #include "game_object.h"
 #include "input/input_handler.h"
 #include <SDL2/SDL.h>
@@ -22,7 +23,7 @@ public:
 private:
   void init_SDL();
 
-  Player *player;
+  Character *player;
   SDL_Window *window;
   SDL_Renderer *renderer;
   bool is_running;

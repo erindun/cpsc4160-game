@@ -1,5 +1,5 @@
 #include "input_handler.h"
-#include "../player.h"
+#include "../character.h"
 #include "../direction.h"
 #include "command.h"
 #include <SDL2/SDL.h>
@@ -7,7 +7,7 @@
 InputHandler::InputHandler() {}
 InputHandler::~InputHandler() {}
 
-Command *InputHandler::handle(Player &player, bool &is_running) {
+Command *InputHandler::handle(Character &player, bool &is_running) {
   SDL_Event e;
   SDL_PollEvent(&e);
   switch (e.type) {

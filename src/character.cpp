@@ -10,7 +10,7 @@ using vec2::Vec2;
 Character::Character()
     : renderer{nullptr}, texture{nullptr}, srcrect{0, 0, FRAME_WIDTH,
                                                    FRAME_HEIGHT},
-      dstrect{0, 0, FRAME_WIDTH, FRAME_HEIGHT}, translate{0}, position{Vec2{
+      dstrect{0, 0, FRAME_WIDTH, FRAME_HEIGHT}, position{Vec2{
                                                                   0, 0}} {}
 
 Character::~Character() {}
@@ -33,10 +33,6 @@ void Character::init(const std::string &file, SDL_Renderer *renderer,
 }
 
 void Character::update() {
-  position.x += 2;
-  if (position.x > GameEngine::SCREEN_WIDTH)
-    position.x = 0;
-
   dstrect.x = position.x;
   dstrect.y = position.y;
 }
@@ -48,3 +44,20 @@ void Character::render() {
 }
 
 void Character::destroy() {}
+
+void Character::move(Direction direction) {
+  switch (direction) {
+  case Direction::up:
+    position += vec2::up * MOVE_SPEED;
+    break;
+  case Direction::down:
+    position += vec2::down * MOVE_SPEED;
+    break;
+  case Direction::left:
+    position += vec2::left * MOVE_SPEED;
+    break;
+  case Direction::right:
+    position += vec2::right * MOVE_SPEED;
+    break;
+  }
+}

@@ -1,6 +1,6 @@
 #pragma once
 #include "../direction.h"
-#include "../player.h"
+#include "../character.h"
 
 class Command {
 public:
@@ -10,11 +10,11 @@ public:
 
 class MoveCommand : public Command {
 public:
-  MoveCommand(Player &player, Direction direction)
+  MoveCommand(Character &player, Direction direction)
       : player{player}, direction{direction} {}
   void execute() override { player.move(direction); }
 
 private:
-  Player &player;
+  Character &player;
   Direction direction;
 };

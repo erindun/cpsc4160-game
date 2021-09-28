@@ -1,5 +1,5 @@
 #pragma once
-#include "../player.h"
+#include "../character.h"
 #include "command.h"
 #include <list>
 
@@ -8,5 +8,5 @@ public:
   InputHandler();
   ~InputHandler();
 
-  Command *handle(Player &player, bool &is_running);
+  Command *handle(Character &player, bool &is_running);
 };
