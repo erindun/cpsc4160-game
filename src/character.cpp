@@ -45,19 +45,7 @@ void Character::render() {
 
 void Character::destroy() {}
 
-void Character::move(Direction direction) {
-  switch (direction) {
-  case Direction::up:
-    position += vec2::up * MOVE_SPEED;
-    break;
-  case Direction::down:
-    position += vec2::down * MOVE_SPEED;
-    break;
-  case Direction::left:
-    position += vec2::left * MOVE_SPEED;
-    break;
-  case Direction::right:
-    position += vec2::right * MOVE_SPEED;
-    break;
-  }
+void Character::move(Vec2 direction) {
+  this->direction = direction;
+  position += direction * MOVE_SPEED;
 }

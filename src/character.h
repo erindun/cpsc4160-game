@@ -1,6 +1,5 @@
 #pragma once
 #include "game_object.h"
-#include "direction.h"
 #include "vec2.h"
 #include <SDL2/SDL.h>
 #include <string>
@@ -19,8 +18,9 @@ public:
   void update() override;
   void render() override;
   void destroy() override;
-  void move(Direction direction);
+  void move(vec2::Vec2 direction);
   vec2::Vec2 position;
+  vec2::Vec2 direction;
 
 private:
   SDL_Renderer *renderer;

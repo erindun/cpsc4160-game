@@ -1,6 +1,6 @@
 #include "input_handler.h"
 #include "../character.h"
-#include "../direction.h"
+#include "../vec2.h"
 #include "command.h"
 #include <SDL2/SDL.h>
 
@@ -23,19 +23,19 @@ Command *InputHandler::handle(Character &player, bool &is_running) {
 
     case SDLK_UP:
     case SDLK_w:
-      return new MoveCommand(player, Direction::up);
+      return new MoveCommand(player, vec2::up);
 
     case SDLK_DOWN:
     case SDLK_s:
-      return new MoveCommand(player, Direction::down);
+      return new MoveCommand(player, vec2::down);
 
     case SDLK_LEFT:
     case SDLK_a:
-      return new MoveCommand(player, Direction::left);
+      return new MoveCommand(player, vec2::left);
 
     case SDLK_RIGHT:
     case SDLK_d:
-      return new MoveCommand(player, Direction::right);
+      return new MoveCommand(player, vec2::right);
     }
   }
 

@@ -1,5 +1,5 @@
 #pragma once
-#include "../direction.h"
+#include "../vec2.h"
 #include "../character.h"
 
 class Command {
@@ -10,11 +10,11 @@ public:
 
 class MoveCommand : public Command {
 public:
-  MoveCommand(Character &player, Direction direction)
+  MoveCommand(Character &player, vec2::Vec2 direction)
       : player{player}, direction{direction} {}
   void execute() override { player.move(direction); }
 
 private:
   Character &player;
-  Direction direction;
+  vec2::Vec2 direction;
 };
