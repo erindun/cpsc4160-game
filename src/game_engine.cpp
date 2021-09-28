@@ -2,7 +2,6 @@
 #include "character.h"
 #include "game_object.h"
 #include "input/command.h"
-#include "player.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
