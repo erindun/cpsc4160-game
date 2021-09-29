@@ -20,11 +20,12 @@ void Character::update() {
   else {
     state = CharacterState::moving;
     direction = velocity;
-    if (velocity.x != 0 && velocity.y)
+    if (velocity.x != 0 && velocity.y) {
       // Reduce diagonal movement speed,
       dampen = 1;
-    // Force character direction to left or right when moving diagonally.
-    direction.y = 0;
+      // Force character direction to left or right when moving diagonally.
+      direction.y = 0;
+    }
   }
   position += velocity * (MOVE_SPEED - dampen);
   sprite->update(position, direction, state);

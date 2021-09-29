@@ -23,4 +23,12 @@ private:
   SDL_Rect srcrect;
   SDL_Rect dstrect;
   SDL_RendererFlip flip;
+  enum AnimationState {
+    idle_forward,
+    idle_back,
+    idle_side,
+    walk_forward,
+    walk_back,
+    walk_side
+  } anim_state;
 };

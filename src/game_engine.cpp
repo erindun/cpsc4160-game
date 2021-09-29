@@ -36,22 +36,8 @@ void GameEngine::init() {
   is_running = true;
 
   player = new Character(
-      new Sprite("../../../../assets/cat_walking.png", renderer), Vec2{0, 40});
+      new Sprite("../../../../assets/cat.png", renderer), Vec2{0, 40});
   game_objects.push_back(player);
-
-  auto fox = new Character(
-      new Sprite("../../../../assets/fox_walking.png", renderer), Vec2{0, 140});
-  game_objects.push_back(fox);
-
-  auto raccoon = new Character(
-      new Sprite("../../../../assets/raccoon_walking.png", renderer),
-      Vec2{0, 240});
-  game_objects.push_back(raccoon);
-
-  auto deer =
-      new Character(new Sprite("../../../../assets/deer_walking.png", renderer),
-                    Vec2{0, 340});
-  game_objects.push_back(deer);
 }
 
 void GameEngine::handle_input() {
