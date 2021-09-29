@@ -23,13 +23,17 @@ Sprite::Sprite(const std::string &file, SDL_Renderer *renderer)
 
 Sprite::~Sprite() {}
 
-void Sprite::update(Vec2 position) {
+void Sprite::update(Vec2 position, Vec2 direction, CharacterState state) {
   dstrect.x = position.x;
   dstrect.y = position.y;
+  if (direction == vec2::left)
+    flip = SDL_FLIP_HORIZONTAL;
+  else
+    flip = SDL_FLIP_NONE;
 }
 
 void Sprite::render() {
   auto frame = (SDL_GetTicks() / 100) % NUM_FRAMES;
   srcrect.x = frame * FRAME_WIDTH;
-  SDL_RenderCopy(renderer, texture, &srcrect, &dstrect);
+  SDL_RenderCopyEx(renderer, texture, &srcrect, &dstrect, 0, nullptr, flip);
 }

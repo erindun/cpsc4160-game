@@ -5,8 +5,21 @@ struct Vec2 {
   int x;
   int y;
 
+  bool operator==(const Vec2 &rhs) {
+    return x == rhs.x && y == rhs.y;
+  }
+
+
   friend Vec2 operator+(Vec2 lhs, const Vec2 &rhs) {
     return Vec2{lhs.x + rhs.x, lhs.y + rhs.y};
+  }
+
+  friend Vec2 operator-(Vec2 lhs, const Vec2 &rhs) {
+    return Vec2{lhs.x - rhs.x, lhs.y - rhs.y};
+  }
+
+  friend Vec2 operator*(const Vec2 &vec, int scalar) {
+    return Vec2{vec.x * scalar, vec.y * scalar};
   }
 
   Vec2 &operator+=(const Vec2 &rhs) {
@@ -14,17 +27,9 @@ struct Vec2 {
     return *this;
   }
 
-  friend Vec2 operator-(Vec2 lhs, const Vec2 &rhs) {
-    return Vec2{lhs.x - rhs.x, lhs.y - rhs.y};
-  }
-
   Vec2 &operator-=(const Vec2 &rhs) {
     *this = *this - rhs;
     return *this;
-  }
-
-  friend Vec2 operator*(const Vec2 &vec, int scalar) {
-    return Vec2{vec.x * scalar, vec.y * scalar};
   }
 
   Vec2 &operator*=(int scalar) {

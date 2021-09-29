@@ -1,5 +1,6 @@
 #pragma once
 
+#include "character_state.h"
 #include "vec2.h"
 #include <SDL2/SDL.h>
 #include <string>
@@ -12,7 +13,7 @@ public:
 
   Sprite(const std::string &file, SDL_Renderer *renderer);
   ~Sprite();
-  void update(vec2::Vec2 position);
+  void update(vec2::Vec2 position, vec2::Vec2 direction, CharacterState state);
   void render();
 
 private:
@@ -21,4 +22,5 @@ private:
   SDL_Texture *texture;
   SDL_Rect srcrect;
   SDL_Rect dstrect;
+  SDL_RendererFlip flip;
 };
