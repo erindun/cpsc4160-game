@@ -8,4 +8,5 @@ public:
   ~InputHandler();
 
   void handle(Character &player, bool &is_running);
+  void handle_pos(Character &player, bool &is_running);
 };

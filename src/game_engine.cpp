@@ -36,7 +36,7 @@ void GameEngine::init() {
   is_running = true;
 
   player = new Character(
-      new Sprite("../../../../assets/cat.png", renderer), Vec2{0, 40});
+      new Sprite("../../../../assets/cat.png", renderer), Vec2{SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2});
   game_objects.push_back(player);
 }
 

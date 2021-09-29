@@ -6,6 +6,9 @@
 #include <SDL2/SDL.h>
 #include <string>
 
+/// A game object to represent a game character.
+/// This class should be generalizable for the
+/// player character as well as NPCs.
 class Character : public GameObject {
 public:
   static const int MOVE_SPEED = 3;

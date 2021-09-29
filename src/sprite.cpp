@@ -54,7 +54,5 @@ void Sprite::update(Vec2 position, Vec2 direction, CharacterState state) {
 }
 
 void Sprite::render() {
-  //auto frame = (SDL_GetTicks() / 100) % NUM_FRAMES;
-  //srcrect.x = frame * FRAME_WIDTH;
   SDL_RenderCopyEx(renderer, texture, &srcrect, &dstrect, 0, nullptr, flip);
 }

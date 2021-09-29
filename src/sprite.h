@@ -5,6 +5,11 @@
 #include <SDL2/SDL.h>
 #include <string>
 
+/// A sprite for a Character game object.
+/// 
+/// Eventually, I plan to generalize this
+/// class sprites that are _not_ Character
+/// objects.
 class Sprite {
 public:
   static const int FRAME_WIDTH = 50;

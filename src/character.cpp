@@ -21,7 +21,7 @@ void Character::update() {
     state = CharacterState::moving;
     direction = velocity;
     if (velocity.x != 0 && velocity.y) {
-      // Reduce diagonal movement speed,
+      // Reduce diagonal movement speed.
       dampen = 1;
       // Force character direction to left or right when moving diagonally.
       direction.y = 0;
