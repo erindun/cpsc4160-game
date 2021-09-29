@@ -1,7 +1,6 @@
 #include "game_engine.h"
 #include "character.h"
 #include "game_object.h"
-#include "input/command.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
@@ -56,9 +55,7 @@ void GameEngine::init() {
 }
 
 void GameEngine::handle_input() {
-  auto command = input_handler.handle(*player, is_running);
-  if (command)
-    command->execute();
+  input_handler.handle(*player, is_running);
 }
 
 void GameEngine::update() {

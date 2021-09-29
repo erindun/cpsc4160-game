@@ -9,7 +9,7 @@ enum class CharacterState { idle, moving };
 
 class Character : public GameObject {
 public:
-  static const int MOVE_SPEED = 4;
+  static const int MOVE_SPEED = 3;
 
   Character(Sprite *sprite, vec2::Vec2 position);
   ~Character();
@@ -19,6 +19,7 @@ public:
   void move(vec2::Vec2 direction);
   vec2::Vec2 position;
   vec2::Vec2 direction;
+  vec2::Vec2 velocity;
 
 private:
   Sprite *sprite;

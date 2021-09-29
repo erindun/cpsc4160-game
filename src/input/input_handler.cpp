@@ -1,47 +1,73 @@
 #include "input_handler.h"
 #include "../character.h"
 #include "../vec2.h"
-#include "command.h"
 #include <SDL2/SDL.h>
 
 InputHandler::InputHandler() {}
 InputHandler::~InputHandler() {}
 
-Command *InputHandler::handle(Character &player, bool &is_running) {
+void InputHandler::handle(Character &player, bool &is_running) {
   SDL_Event e;
   SDL_PollEvent(&e);
   switch (e.type) {
   case SDL_QUIT:
     is_running = false;
-    return nullptr;
+    break;
 
-  case SDL_KEYDOWN: {
+  case SDL_KEYDOWN:
     switch (e.key.keysym.sym) {
     case SDLK_ESCAPE:
       is_running = false;
-      return nullptr;
+      break;
 
     case SDLK_UP:
     case SDLK_w:
-      return new MoveCommand(player, vec2::up);
+      player.velocity.y = -1;
+      break;
 
     case SDLK_DOWN:
     case SDLK_s:
-      return new MoveCommand(player, vec2::down);
+      player.velocity.y = 1;
+      break;
 
     case SDLK_LEFT:
     case SDLK_a:
-      return new MoveCommand(player, vec2::left);
+      player.velocity.x = -1;
+      break;
 
     case SDLK_RIGHT:
     case SDLK_d:
-      return new MoveCommand(player, vec2::right);
+      player.velocity.x = 1;
+      break;
     }
-  }
+    break;
 
-  default:
+  case SDL_KEYUP:
+    switch (e.key.keysym.sym) {
+    case SDLK_UP:
+    case SDLK_w:
+      if (player.velocity.y == vec2::up.y)
+        player.velocity.y = 0;
+        break;
+
+    case SDLK_DOWN:
+    case SDLK_s:
+      if (player.velocity.y == vec2::down.y)
+        player.velocity.y = 0;
+      break;
+
+    case SDLK_LEFT:
+    case SDLK_a:
+      if (player.velocity.x == vec2::left.x)
+        player.velocity.x = 0;
+      break;
+
+    case SDLK_RIGHT:
+    case SDLK_d:
+      if (player.velocity.x == vec2::right.x)
+        player.velocity.x = 0;
+      break;
+    }
     break;
   }
-
-  return nullptr;
 }

@@ -8,17 +8,20 @@
 using vec2::Vec2;
 
 Character::Character(Sprite *sprite, Vec2 position)
-    : sprite{sprite}, position{position}, direction{vec2::down},
+    : sprite{sprite}, position{position},
+      direction{vec2::down}, velocity{vec2::zero},
       state{CharacterState::idle} {}
 
 Character::~Character() {}
 
-void Character::update() { sprite->update(position); }
+void Character::update() { 
+  sprite->update(position); 
+  std::cout << velocity.x << " " << velocity.y << " " << std::endl;
+
+  // Reduce diagonal movement speed.
+  int dampen = velocity.x != 0 && velocity.y != 0 ? -1 : 0;
+
+  position += velocity * (MOVE_SPEED + dampen);
+}
 
 void Character::render() { sprite->render(); }
-
-void Character::move(Vec2 direction) {
-  this->direction = direction;
-  state = CharacterState::moving;
-  position += direction * MOVE_SPEED;
-}
