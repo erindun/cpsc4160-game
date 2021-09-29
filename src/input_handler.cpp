@@ -1,6 +1,6 @@
 #include "input_handler.h"
-#include "../character.h"
-#include "../vec2.h"
+#include "character.h"
+#include "vec2.h"
 #include <SDL2/SDL.h>
 
 InputHandler::InputHandler() {}

@@ -2,7 +2,7 @@
 
 #include "character.h"
 #include "game_object.h"
-#include "input/input_handler.h"
+#include "input_handler.h"
 #include "sprite.h"
 #include <SDL2/SDL.h>
 #include <list>

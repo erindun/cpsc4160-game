@@ -1,6 +1,6 @@
 #include "character.h"
 #include "game_engine.h"
-#include "input/input_handler.h"
+#include "input_handler.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
