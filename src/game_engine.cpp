@@ -1,13 +1,14 @@
 #include "game_engine.h"
-#include "constants.h"
 #include "character.h"
+#include "constants.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
 using vec2::Vec2;
 
 GameEngine::GameEngine()
-    : window{nullptr}, renderer{nullptr}, player{nullptr}, is_running{false} {}
+    : window{nullptr}, renderer{nullptr}, background{nullptr},
+      is_running{false}, player{nullptr} {}
 
 GameEngine::~GameEngine() {}
 
@@ -35,8 +36,8 @@ void GameEngine::init() {
   init_SDL();
   is_running = true;
 
-  player = new Character(
-      new Sprite("../../../../assets/cat.png", renderer), Vec2{SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2});
+  player = new Character(new Sprite("../../../../assets/cat.png", renderer),
+                         Vec2{SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2});
   game_objects.push_back(player);
 
   SDL_Surface *bg_surface = IMG_Load("../../../../assets/background.png");
@@ -51,9 +52,7 @@ void GameEngine::init() {
   SDL_FreeSurface(bg_surface);
 }
 
-void GameEngine::handle_input() {
-  input_handler.handle(*player, is_running);
-}
+void GameEngine::handle_input() { input_handler.handle(*player, is_running); }
 
 void GameEngine::update() {
   for (auto obj : game_objects)

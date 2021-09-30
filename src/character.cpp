@@ -8,8 +8,8 @@
 using vec2::Vec2;
 
 Character::Character(Sprite *sprite, Vec2 position)
-    : sprite{sprite}, position{position}, direction{vec2::down},
-      velocity{vec2::zero}, state{CharacterState::idle} {}
+    : position{position}, direction{vec2::down}, velocity{vec2::zero},
+      sprite{sprite}, state{CharacterState::idle} {}
 
 Character::~Character() {}
 

@@ -20,11 +20,11 @@ public:
 private:
   void init_SDL();
 
-  Character *player;
   SDL_Window *window;
   SDL_Renderer *renderer;
   SDL_Texture *background;
   bool is_running;
   InputHandler input_handler;
   std::list<GameObject *> game_objects;
+  Character *player;
 };

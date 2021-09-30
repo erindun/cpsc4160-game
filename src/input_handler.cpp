@@ -50,7 +50,7 @@ void InputHandler::handle(Character &player, bool &is_running) {
     case SDLK_w:
       if (player.velocity.y == vec2::up.y)
         player.velocity.y = 0;
-        break;
+      break;
 
     case SDLK_DOWN:
     case SDLK_s:
