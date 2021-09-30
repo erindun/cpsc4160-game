@@ -1,12 +1,9 @@
 #include "game_engine.h"
 #include "game_object.h"
-
+#include "constants.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_timer.h>
 #include <iostream>
-
-const int FPS = 60;
-const int FRAME_DURATION = 1000 / FPS;
 
 int main(int argc, char *argv[]) {
   auto engine = new GameEngine();

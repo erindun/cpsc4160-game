@@ -1,7 +1,8 @@
 #pragma once
+#include "character_state.h"
+#include "constants.h"
 #include "game_object.h"
 #include "sprite.h"
-#include "character_state.h"
 #include "vec2.h"
 #include <SDL2/SDL.h>
 #include <string>
@@ -11,7 +12,7 @@
 /// player character as well as NPCs.
 class Character : public GameObject {
 public:
-  static const int MOVE_SPEED = 3;
+  static const int MOVE_SPEED = 2 * SCALE_FACTOR;
 
   Character(Sprite *sprite, vec2::Vec2 position);
   ~Character();

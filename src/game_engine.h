@@ -3,15 +3,11 @@
 #include "character.h"
 #include "game_object.h"
 #include "input_handler.h"
-#include "sprite.h"
 #include <SDL2/SDL.h>
 #include <list>
 
 class GameEngine {
 public:
-  static const int SCREEN_WIDTH = 640;
-  static const int SCREEN_HEIGHT = 480;
-
   GameEngine();
   ~GameEngine();
   void init();
@@ -27,6 +23,7 @@ private:
   Character *player;
   SDL_Window *window;
   SDL_Renderer *renderer;
+  SDL_Texture *background;
   bool is_running;
   InputHandler input_handler;
   std::list<GameObject *> game_objects;

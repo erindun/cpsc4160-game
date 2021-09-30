@@ -1,6 +1,6 @@
 #include "game_engine.h"
+#include "constants.h"
 #include "character.h"
-#include "game_object.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
@@ -38,6 +38,17 @@ void GameEngine::init() {
   player = new Character(
       new Sprite("../../../../assets/cat.png", renderer), Vec2{SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2});
   game_objects.push_back(player);
+
+  SDL_Surface *bg_surface = IMG_Load("../../../../assets/background.png");
+  if (bg_surface == nullptr) {
+    std::cout << IMG_GetError() << std::endl;
+  } else {
+    background = SDL_CreateTextureFromSurface(renderer, bg_surface);
+    if (background == nullptr) {
+      std::cout << SDL_GetError() << std::endl;
+    }
+  }
+  SDL_FreeSurface(bg_surface);
 }
 
 void GameEngine::handle_input() {
@@ -54,8 +65,7 @@ void GameEngine::render() {
 
   // Draw background
   SDL_Rect bg_rect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
-  SDL_SetRenderDrawColor(renderer, 157, 199, 159, 255);
-  SDL_RenderFillRect(renderer, &bg_rect);
+  SDL_RenderCopy(renderer, background, nullptr, &bg_rect);
 
   for (auto obj : game_objects)
     obj->render();

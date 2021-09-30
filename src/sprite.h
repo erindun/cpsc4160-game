@@ -1,19 +1,20 @@
 #pragma once
 
 #include "character_state.h"
+#include "constants.h"
 #include "vec2.h"
 #include <SDL2/SDL.h>
 #include <string>
 
 /// A sprite for a Character game object.
-/// 
+///
 /// Eventually, I plan to generalize this
 /// class sprites that are _not_ Character
 /// objects.
 class Sprite {
 public:
-  static const int FRAME_WIDTH = 50;
-  static const int FRAME_HEIGHT = 74;
+  static const int FRAME_WIDTH = 25;
+  static const int FRAME_HEIGHT = 37;
   static const int NUM_FRAMES = 8;
 
   Sprite(const std::string &file, SDL_Renderer *renderer);
