@@ -5,7 +5,7 @@ find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
 
-add_executable (main "main.cpp"
+add_executable (my_game "main.cpp"
                      "game_engine.h"
                      "game_engine.cpp"
                      "character.h"
@@ -18,4 +18,4 @@ add_executable (main "main.cpp"
                      "sprite.cpp"
                      "character_state.h")
 
-target_link_libraries(main ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+target_link_libraries(my_game ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
