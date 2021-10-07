@@ -36,11 +36,11 @@ void GameEngine::init() {
   init_SDL();
   is_running = true;
 
-  player = new Character(new Sprite("../../../../assets/cat.png", renderer),
+  player = new Character(new Sprite("../../assets/cat.png", renderer),
                          Vec2{SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2});
   game_objects.push_back(player);
 
-  SDL_Surface *bg_surface = IMG_Load("../../../../assets/background.png");
+  SDL_Surface *bg_surface = IMG_Load("../../assets/background.png");
   if (bg_surface == nullptr) {
     std::cout << IMG_GetError() << std::endl;
   } else {
