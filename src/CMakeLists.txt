@@ -1,14 +1,21 @@
-﻿# CMakeList.txt : CMake project for Cpsc4160Game, include source and define
-# project specific logic here.
-#
-cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required (VERSION 3.8)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
-find_package(SDL2 CONFIG REQUIRED)
-find_package(sdl2-image CONFIG REQUIRED)
+find_package(SDL2 REQUIRED)
+find_package(SDL2_image REQUIRED)
+include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
 
-# Add source to this project's executable.
-add_executable (main "main.cpp"  "game_engine.h" "game_engine.cpp" "character.h" "character.cpp" "vec2.h" "input_handler.h" "input_handler.cpp"  "game_object.h" "sprite.h" "sprite.cpp" "character_state.h" "constants.h")
+add_executable (main "main.cpp"
+                     "game_engine.h"
+                     "game_engine.cpp"
+                     "character.h"
+                     "character.cpp"
+                     "vec2.h"
+                     "input_handler.h"
+                     "input_handler.cpp"
+                     "game_object.h"
+                     "sprite.h"
+                     "sprite.cpp"
+                     "character_state.h")
 
-target_link_libraries(main PRIVATE SDL2::SDL2 SDL2::SDL2main SDL2::SDL2_image)
-
-# TODO: Add tests and install targets if needed.
+target_link_libraries(main ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
