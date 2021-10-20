@@ -24,7 +24,7 @@ void GameEngine::init_SDL() {
 
   window =
       SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED,
-                       SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+                       SDL_WINDOWPOS_CENTERED, VIEW_WIDTH, VIEW_HEIGHT, 0);
   renderer = SDL_CreateRenderer(window, -1, 0);
 
   if (window == nullptr || renderer == nullptr) {
@@ -37,19 +37,8 @@ void GameEngine::init() {
   is_running = true;
 
   player = new Character(new Sprite("../../assets/cat.png", renderer),
-                         Vec2{SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2});
+                         Vec2{VIEW_WIDTH / 2, VIEW_HEIGHT / 2});
   game_objects.push_back(player);
-
-  SDL_Surface *bg_surface = IMG_Load("../../assets/background.png");
-  if (bg_surface == nullptr) {
-    std::cout << IMG_GetError() << std::endl;
-  } else {
-    background = SDL_CreateTextureFromSurface(renderer, bg_surface);
-    if (background == nullptr) {
-      std::cout << SDL_GetError() << std::endl;
-    }
-  }
-  SDL_FreeSurface(bg_surface);
 }
 
 void GameEngine::handle_input() { input_handler.handle(*player, is_running); }
@@ -63,8 +52,8 @@ void GameEngine::render() {
   SDL_RenderClear(renderer);
 
   // Draw background
-  SDL_Rect bg_rect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
-  SDL_RenderCopy(renderer, background, nullptr, &bg_rect);
+  SDL_Rect bg_rect = {0, 0, VIEW_WIDTH, VIEW_HEIGHT};
+  //SDL_RenderCopy(renderer, background, nullptr, &bg_rect);
 
   for (auto obj : game_objects)
     obj->render();
