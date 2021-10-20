@@ -3,6 +3,7 @@
 #include "character.h"
 #include "game_object.h"
 #include "input_handler.h"
+#include "tile_handler.h"
 #include <SDL2/SDL.h>
 #include <list>
 
@@ -25,6 +26,7 @@ private:
   SDL_Texture *background;
   bool is_running;
   InputHandler input_handler;
+  TileHandler *tile_handler;
   std::list<GameObject *> game_objects;
   Character *player;
 };

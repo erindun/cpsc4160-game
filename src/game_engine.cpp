@@ -8,7 +8,7 @@ using vec2::Vec2;
 
 GameEngine::GameEngine()
     : window{nullptr}, renderer{nullptr}, background{nullptr},
-      is_running{false}, player{nullptr} {}
+      is_running{false}, player{nullptr}, tile_handler{nullptr} {}
 
 GameEngine::~GameEngine() {}
 
@@ -39,6 +39,8 @@ void GameEngine::init() {
   player = new Character(new Sprite("../../assets/cat.png", renderer),
                          Vec2{VIEW_WIDTH / 2, VIEW_HEIGHT / 2});
   game_objects.push_back(player);
+
+  tile_handler = new TileHandler("../../assets/tilemap.csv");
 }
 
 void GameEngine::handle_input() { input_handler.handle(*player, is_running); }
