@@ -42,17 +42,7 @@ void GameEngine::init() {
                          Vec2{VIEW_WIDTH / 2, VIEW_HEIGHT / 2});
   game_objects.push_back(player);
 
-  // SDL_Surface *bg_surface = IMG_Load("../../assets/background.png");
-  // if (bg_surface == nullptr) {
-  //   std::cout << IMG_GetError() << std::endl;
-  // } else {
-  //   background = SDL_CreateTextureFromSurface(renderer, bg_surface);
-  //   if (background == nullptr) {
-  //     std::cout << SDL_GetError() << std::endl;
-  //   }
-  // // }
-  // SDL_FreeSurface(bg_surface);
-  tile_handler = new TileHandler(renderer, "../../assets/tilemap.csv");
+  tile_handler = new TileHandler(renderer, "../../assets/tilemap.csv", "../../assets/tileset.png");
 }
 
 void GameEngine::handle_input() { input_handler.handle(*player, is_running); }

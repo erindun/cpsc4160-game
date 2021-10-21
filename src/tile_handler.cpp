@@ -4,8 +4,8 @@
 #include <sstream>
 #include <SDL_image.h>
 
-TileHandler::TileHandler(SDL_Renderer *renderer, const std::string &filepath) {
-  std::ifstream file(filepath);
+TileHandler::TileHandler(SDL_Renderer *renderer, const std::string &tilemap_filepath, const std::string &tileset_filepath) {
+  std::ifstream file(tilemap_filepath);
   for (int i = 0; i < NUM_TILES; i++) {
     std::string line;
     std::getline(file, line);
@@ -17,7 +17,7 @@ TileHandler::TileHandler(SDL_Renderer *renderer, const std::string &filepath) {
     }
   }
 
-  SDL_Surface *tileset_surface = IMG_Load("../../assets/tileset.png");
+  SDL_Surface *tileset_surface = IMG_Load(tileset_filepath.c_str());
   if (tileset_surface == nullptr) {
     std::cout << IMG_GetError() << std::endl;
   } else {

@@ -9,7 +9,8 @@ public:
   static const int TILE_SIZE = 16;
   static const int NUM_TILES = 50;
 
-  TileHandler(SDL_Renderer *renderer, const std::string &filepath);
+  TileHandler(SDL_Renderer *renderer, const std::string &tilemap_filepath,
+              const std::string &tileset_filepath);
   ~TileHandler();
   bool is_visible(int x, int y);
   void draw(SDL_Renderer *renderer, SDL_Rect camera);
