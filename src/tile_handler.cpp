@@ -1,7 +1,7 @@
 #include "tile_handler.h"
 #include <fstream>
-#include <sstream>
 #include <iostream>
+#include <sstream>
 
 TileHandler::TileHandler(const std::string &filepath) {
   std::ifstream file(filepath);

@@ -9,7 +9,7 @@ using vec2::Vec2;
 GameEngine::GameEngine()
     : window{nullptr}, renderer{nullptr}, background{nullptr},
       is_running{false}, player{nullptr},
-      tile_handler{nullptr}, camera{0, 0, VIEW_WIDTH, VIEW_HEIGHT}   {}
+      tile_handler{nullptr}, camera{0, 0, VIEW_WIDTH, VIEW_HEIGHT} {}
 
 GameEngine::~GameEngine() {}
 
@@ -23,9 +23,9 @@ void GameEngine::init_SDL() {
   // Enable gpu_enhanced textures
   IMG_Init(IMG_INIT_PNG);
 
-  window =
-      SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED,
-                       SDL_WINDOWPOS_CENTERED, VIEW_WIDTH * 2, VIEW_HEIGHT * 2, 0);
+  window = SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED,
+                            SDL_WINDOWPOS_CENTERED, VIEW_WIDTH * 2,
+                            VIEW_HEIGHT * 2, 0);
   renderer = SDL_CreateRenderer(window, -1, 0);
 
   if (window == nullptr || renderer == nullptr) {
@@ -60,8 +60,8 @@ void GameEngine::handle_input() { input_handler.handle(*player, is_running); }
 void GameEngine::update() {
   for (auto obj : game_objects)
     obj->update();
-  camera.x = player->position.x - VIEW_WIDTH / 2;
-  camera.y = player->position.y - VIEW_HEIGHT / 2;
+  camera.x = (player->position.x + Sprite::FRAME_WIDTH / 2) - VIEW_WIDTH / 2;
+  camera.y = (player->position.y + Sprite::FRAME_WIDTH / 2) - VIEW_HEIGHT / 2;
 
   if (camera.x < 0)
     camera.x = 0;
@@ -81,7 +81,7 @@ void GameEngine::render() {
   SDL_Rect bg_rect = {0, 0, SCENE_WIDTH, SCENE_HEIGHT};
   SDL_RenderCopy(renderer, background, &camera, nullptr);
   for (auto obj : game_objects)
-    obj->render(camera.x, camera.y);
+    obj->render(camera);
 
   SDL_RenderPresent(renderer);
 }

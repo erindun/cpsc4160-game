@@ -30,6 +30,5 @@ private:
   TileHandler *tile_handler;
   std::list<GameObject *> game_objects;
   Character *player;
-  //Camera camera;
   SDL_Rect camera;
 };

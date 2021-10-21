@@ -31,4 +31,4 @@ void Character::update() {
   sprite->update(position, direction, state);
 }
 
-void Character::render(int x, int y) { sprite->render(x, y); }
+void Character::render(SDL_Rect camera) { sprite->render(camera); }

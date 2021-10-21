@@ -1,6 +1,6 @@
+#include "constants.h"
 #include "game_engine.h"
 #include "game_object.h"
-#include "constants.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_timer.h>
 #include <iostream>
@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
       current_fps = fps_counter;
       fps_counter = 0;
     }
-    //std::cout << current_fps << std::endl;
+    // std::cout << current_fps << std::endl;
 
     this_duration = SDL_GetTicks() - ticks;
     if (this_duration < FRAME_DURATION) {

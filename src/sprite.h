@@ -20,7 +20,7 @@ public:
   Sprite(const std::string &file, SDL_Renderer *renderer);
   ~Sprite();
   void update(vec2::Vec2 position, vec2::Vec2 direction, CharacterState state);
-  void render(int x, int y);
+  void render(SDL_Rect camera);
 
 private:
   int current_frame;
