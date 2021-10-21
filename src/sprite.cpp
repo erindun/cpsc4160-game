@@ -8,7 +8,7 @@ using vec2::Vec2;
 Sprite::Sprite(const std::string &file, SDL_Renderer *renderer)
     : current_frame{0}, renderer{renderer}, texture{nullptr},
       srcrect{0, 0, FRAME_WIDTH, FRAME_HEIGHT},
-      dstrect{0, 0, FRAME_WIDTH * SCALE_FACTOR, FRAME_HEIGHT * SCALE_FACTOR} {
+      dstrect{0, 0, FRAME_WIDTH, FRAME_HEIGHT} {
   SDL_Surface *image = IMG_Load(file.c_str());
   if (image == nullptr) {
     std::cout << IMG_GetError() << std::endl;
