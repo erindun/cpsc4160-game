@@ -17,7 +17,7 @@ public:
   static const int FRAME_HEIGHT = 37;
   static const int NUM_FRAMES = 8;
 
-  Sprite(const std::string &file, SDL_Renderer *renderer);
+  Sprite(const std::string &filepath, SDL_Renderer *renderer);
   ~Sprite();
   void update(vec2::Vec2 position, vec2::Vec2 direction, CharacterState state);
   void render(SDL_Rect camera);

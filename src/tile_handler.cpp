@@ -1,11 +1,15 @@
 #include "tile_handler.h"
+#include "utils.h"
+#include <SDL_image.h>
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include <SDL_image.h>
 
-TileHandler::TileHandler(SDL_Renderer *renderer, const std::string &tilemap_filepath, const std::string &tileset_filepath) {
+TileHandler::TileHandler(SDL_Renderer *renderer,
+                         const std::string &tilemap_filepath,
+                         const std::string &tileset_filepath) {
   std::ifstream file(tilemap_filepath);
+  // Read CSV into tilemap array.
   for (int i = 0; i < NUM_TILES; i++) {
     std::string line;
     std::getline(file, line);
@@ -17,34 +21,18 @@ TileHandler::TileHandler(SDL_Renderer *renderer, const std::string &tilemap_file
     }
   }
 
-  SDL_Surface *tileset_surface = IMG_Load(tileset_filepath.c_str());
-  if (tileset_surface == nullptr) {
-    std::cout << IMG_GetError() << std::endl;
-  } else {
-    tileset = SDL_CreateTextureFromSurface(renderer, tileset_surface);
-    if (tileset == nullptr) {
-      std::cout << SDL_GetError() << std::endl;
-    }
-  }
-  SDL_FreeSurface(tileset_surface);
+  tileset = load_texture(renderer, tileset_filepath);
 }
 
-void TileHandler::draw(SDL_Renderer *renderer, SDL_Rect camera) {
-for (int i = 0; i < NUM_TILES; i++) {
-  for (int j = 0; j < NUM_TILES; j++) {
-    SDL_Rect dstrect = {
-      j * TILE_SIZE - camera.x,
-      i * TILE_SIZE - camera.y,
-      TILE_SIZE,
-      TILE_SIZE
-    };
-    SDL_Rect srcrect = {
-      (tiles.at(i).at(j) % TILES_PER_ROW) * TILE_SIZE,
-      (tiles.at(i).at(j) / TILES_PER_ROW) * TILE_SIZE,
-      TILE_SIZE,
-      TILE_SIZE
-    };
-    SDL_RenderCopy(renderer, tileset, &srcrect, &dstrect);
+void TileHandler::render(SDL_Renderer *renderer, SDL_Rect camera) {
+  for (int i = 0; i < NUM_TILES; i++) {
+    for (int j = 0; j < NUM_TILES; j++) {
+      SDL_Rect dstrect = {j * TILE_SIZE - camera.x, i * TILE_SIZE - camera.y,
+                          TILE_SIZE, TILE_SIZE};
+      SDL_Rect srcrect = {(tiles.at(i).at(j) % TILES_PER_ROW) * TILE_SIZE,
+                          (tiles.at(i).at(j) / TILES_PER_ROW) * TILE_SIZE,
+                          TILE_SIZE, TILE_SIZE};
+      SDL_RenderCopy(renderer, tileset, &srcrect, &dstrect);
+    }
   }
-}
 }

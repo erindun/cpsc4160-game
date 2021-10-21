@@ -13,7 +13,7 @@ public:
               const std::string &tileset_filepath);
   ~TileHandler();
   bool is_visible(int x, int y);
-  void draw(SDL_Renderer *renderer, SDL_Rect camera);
+  void render(SDL_Renderer *renderer, SDL_Rect camera);
 
 private:
   std::array<std::array<int, 50>, 50> tiles;

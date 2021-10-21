@@ -1,24 +1,17 @@
 #include "sprite.h"
+#include "utils.h"
 #include "vec2.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
 using vec2::Vec2;
 
-Sprite::Sprite(const std::string &file, SDL_Renderer *renderer)
-    : current_frame{0}, renderer{renderer}, texture{nullptr},
+Sprite::Sprite(const std::string &filepath, SDL_Renderer *renderer)
+    : current_frame{0}, renderer{renderer},
       srcrect{0, 0, FRAME_WIDTH, FRAME_HEIGHT}, dstrect{0, 0, FRAME_WIDTH,
-                                                        FRAME_HEIGHT} {
-  SDL_Surface *image = IMG_Load(file.c_str());
-  if (image == nullptr) {
-    std::cout << IMG_GetError() << std::endl;
-  } else {
-    texture = SDL_CreateTextureFromSurface(renderer, image);
-    if (texture == nullptr) {
-      std::cout << SDL_GetError() << std::endl;
-    }
-  }
-  SDL_FreeSurface(image);
+                                                        FRAME_HEIGHT},
+      anim_state{idle_forward}, flip{SDL_FLIP_NONE} {
+  texture = load_texture(renderer, filepath);
 }
 
 Sprite::~Sprite() {}
@@ -55,6 +48,6 @@ void Sprite::update(Vec2 position, Vec2 direction, CharacterState state) {
 
 void Sprite::render(SDL_Rect camera) {
   SDL_Rect draw_rect = {dstrect.x - camera.x, dstrect.y - camera.y, dstrect.w,
-                       dstrect.h};
+                        dstrect.h};
   SDL_RenderCopyEx(renderer, texture, &srcrect, &draw_rect, 0, nullptr, flip);
 }

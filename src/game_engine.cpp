@@ -50,28 +50,26 @@ void GameEngine::handle_input() { input_handler.handle(*player, is_running); }
 void GameEngine::update() {
   for (auto obj : game_objects)
     obj->update();
+
+  // Set the camera to follow the player.
   camera.x = (player->position.x + Sprite::FRAME_WIDTH / 2) - VIEW_WIDTH / 2;
   camera.y = (player->position.y + Sprite::FRAME_WIDTH / 2) - VIEW_HEIGHT / 2;
 
+  // Clamp the camera within the screen.
   if (camera.x < 0)
     camera.x = 0;
   if (camera.y < 0)
     camera.y = 0;
-
   if (camera.x + camera.w >= SCENE_WIDTH)
     camera.x = SCENE_WIDTH - VIEW_WIDTH;
   if (camera.y + camera.h >= SCENE_HEIGHT)
     camera.y = SCENE_HEIGHT - VIEW_HEIGHT;
-    std::cout << camera.x << " " << camera.y << std::endl;
 }
 
 void GameEngine::render() {
   SDL_RenderClear(renderer);
 
-  // Draw background
-  // SDL_Rect bg_rect = {0, 0, SCENE_WIDTH, SCENE_HEIGHT};
-  // SDL_RenderCopy(renderer, background, &camera, nullptr);
-  tile_handler->draw(renderer, camera);
+  tile_handler->render(renderer, camera);
   for (auto obj : game_objects)
     obj->render(camera);
 
