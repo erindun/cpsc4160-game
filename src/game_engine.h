@@ -3,7 +3,9 @@
 #include "character.h"
 #include "game_object.h"
 #include "input_handler.h"
+#include "camera.h"
 #include "tile_handler.h"
+#include "vec2.h"
 #include <SDL2/SDL.h>
 #include <list>
 
@@ -29,4 +31,6 @@ private:
   TileHandler *tile_handler;
   std::list<GameObject *> game_objects;
   Character *player;
+  //Camera camera;
+  SDL_Rect camera;
 };

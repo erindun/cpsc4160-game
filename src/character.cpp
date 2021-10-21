@@ -31,4 +31,4 @@ void Character::update() {
   sprite->update(position, direction, state);
 }
 
-void Character::render() { sprite->render(); }
+void Character::render(int x, int y) { sprite->render(x, y); }

@@ -7,8 +7,8 @@ using vec2::Vec2;
 
 Sprite::Sprite(const std::string &file, SDL_Renderer *renderer)
     : current_frame{0}, renderer{renderer}, texture{nullptr},
-      srcrect{0, 0, FRAME_WIDTH, FRAME_HEIGHT}, dstrect{0, 0, FRAME_WIDTH * SCALE_FACTOR,
-                                                        FRAME_HEIGHT * SCALE_FACTOR} {
+      srcrect{0, 0, FRAME_WIDTH, FRAME_HEIGHT},
+      dstrect{0, 0, FRAME_WIDTH * SCALE_FACTOR, FRAME_HEIGHT * SCALE_FACTOR} {
   SDL_Surface *image = IMG_Load(file.c_str());
   if (image == nullptr) {
     std::cout << IMG_GetError() << std::endl;
@@ -53,6 +53,7 @@ void Sprite::update(Vec2 position, Vec2 direction, CharacterState state) {
   srcrect.y = FRAME_HEIGHT * anim_state;
 }
 
-void Sprite::render() {
-  SDL_RenderCopyEx(renderer, texture, &srcrect, &dstrect, 0, nullptr, flip);
+void Sprite::render(int x, int y) {
+  SDL_Rect drawrect = {dstrect.x - x, dstrect.y - y, dstrect.w, dstrect.h};
+  SDL_RenderCopyEx(renderer, texture, &srcrect, &drawrect, 0, nullptr, flip);
 }

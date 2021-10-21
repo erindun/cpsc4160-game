@@ -4,5 +4,5 @@
 class GameObject {
 public:
   virtual void update() = 0;
-  virtual void render() = 0;
+  virtual void render(int x, int y) = 0;
 };

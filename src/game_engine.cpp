@@ -8,7 +8,8 @@ using vec2::Vec2;
 
 GameEngine::GameEngine()
     : window{nullptr}, renderer{nullptr}, background{nullptr},
-      is_running{false}, player{nullptr}, tile_handler{nullptr} {}
+      is_running{false}, player{nullptr},
+      tile_handler{nullptr}, camera{0, 0, VIEW_WIDTH, VIEW_HEIGHT}   {}
 
 GameEngine::~GameEngine() {}
 
@@ -24,12 +25,13 @@ void GameEngine::init_SDL() {
 
   window =
       SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED,
-                       SDL_WINDOWPOS_CENTERED, VIEW_WIDTH, VIEW_HEIGHT, 0);
+                       SDL_WINDOWPOS_CENTERED, VIEW_WIDTH * 2, VIEW_HEIGHT * 2, 0);
   renderer = SDL_CreateRenderer(window, -1, 0);
 
   if (window == nullptr || renderer == nullptr) {
     exit(2);
   }
+  SDL_RenderSetLogicalSize(renderer, 640, 360);
 }
 
 void GameEngine::init() {
@@ -40,6 +42,16 @@ void GameEngine::init() {
                          Vec2{VIEW_WIDTH / 2, VIEW_HEIGHT / 2});
   game_objects.push_back(player);
 
+  SDL_Surface *bg_surface = IMG_Load("../../assets/background.png");
+  if (bg_surface == nullptr) {
+    std::cout << IMG_GetError() << std::endl;
+  } else {
+    background = SDL_CreateTextureFromSurface(renderer, bg_surface);
+    if (background == nullptr) {
+      std::cout << SDL_GetError() << std::endl;
+    }
+  }
+  SDL_FreeSurface(bg_surface);
   tile_handler = new TileHandler("../../assets/tilemap.csv");
 }
 
@@ -48,17 +60,28 @@ void GameEngine::handle_input() { input_handler.handle(*player, is_running); }
 void GameEngine::update() {
   for (auto obj : game_objects)
     obj->update();
+  camera.x = player->position.x - VIEW_WIDTH / 2;
+  camera.y = player->position.y - VIEW_HEIGHT / 2;
+
+  if (camera.x < 0)
+    camera.x = 0;
+  if (camera.y < 0)
+    camera.y = 0;
+
+  if (camera.x + camera.w >= SCENE_WIDTH)
+    camera.x = SCENE_WIDTH - VIEW_WIDTH;
+  if (camera.y + camera.h >= SCENE_HEIGHT)
+    camera.y = SCENE_HEIGHT - VIEW_HEIGHT;
 }
 
 void GameEngine::render() {
   SDL_RenderClear(renderer);
 
   // Draw background
-  SDL_Rect bg_rect = {0, 0, VIEW_WIDTH, VIEW_HEIGHT};
-  //SDL_RenderCopy(renderer, background, nullptr, &bg_rect);
-
+  SDL_Rect bg_rect = {0, 0, SCENE_WIDTH, SCENE_HEIGHT};
+  SDL_RenderCopy(renderer, background, &camera, nullptr);
   for (auto obj : game_objects)
-    obj->render();
+    obj->render(camera.x, camera.y);
 
   SDL_RenderPresent(renderer);
 }

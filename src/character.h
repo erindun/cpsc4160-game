@@ -18,7 +18,7 @@ public:
   ~Character();
 
   void update() override;
-  void render() override;
+  void render(int x, int y) override;
   vec2::Vec2 position;
   vec2::Vec2 direction;
   vec2::Vec2 velocity;
