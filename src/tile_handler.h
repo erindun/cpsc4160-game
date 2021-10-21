@@ -1,4 +1,5 @@
 #pragma once
+#include <SDL.h>
 #include <array>
 #include <string>
 
@@ -8,9 +9,12 @@ public:
   static const int TILE_SIZE = 16;
   static const int NUM_TILES = 50;
 
-  TileHandler(const std::string &filepath);
+  TileHandler(SDL_Renderer *renderer, const std::string &filepath);
   ~TileHandler();
+  bool is_visible(int x, int y);
+  void draw(SDL_Renderer *renderer, SDL_Rect camera);
 
 private:
   std::array<std::array<int, 50>, 50> tiles;
+  SDL_Texture *tileset;
 };

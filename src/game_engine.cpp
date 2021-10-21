@@ -42,17 +42,17 @@ void GameEngine::init() {
                          Vec2{VIEW_WIDTH / 2, VIEW_HEIGHT / 2});
   game_objects.push_back(player);
 
-  SDL_Surface *bg_surface = IMG_Load("../../assets/background.png");
-  if (bg_surface == nullptr) {
-    std::cout << IMG_GetError() << std::endl;
-  } else {
-    background = SDL_CreateTextureFromSurface(renderer, bg_surface);
-    if (background == nullptr) {
-      std::cout << SDL_GetError() << std::endl;
-    }
-  }
-  SDL_FreeSurface(bg_surface);
-  tile_handler = new TileHandler("../../assets/tilemap.csv");
+  // SDL_Surface *bg_surface = IMG_Load("../../assets/background.png");
+  // if (bg_surface == nullptr) {
+  //   std::cout << IMG_GetError() << std::endl;
+  // } else {
+  //   background = SDL_CreateTextureFromSurface(renderer, bg_surface);
+  //   if (background == nullptr) {
+  //     std::cout << SDL_GetError() << std::endl;
+  //   }
+  // // }
+  // SDL_FreeSurface(bg_surface);
+  tile_handler = new TileHandler(renderer, "../../assets/tilemap.csv");
 }
 
 void GameEngine::handle_input() { input_handler.handle(*player, is_running); }
@@ -72,14 +72,16 @@ void GameEngine::update() {
     camera.x = SCENE_WIDTH - VIEW_WIDTH;
   if (camera.y + camera.h >= SCENE_HEIGHT)
     camera.y = SCENE_HEIGHT - VIEW_HEIGHT;
+    std::cout << camera.x << " " << camera.y << std::endl;
 }
 
 void GameEngine::render() {
   SDL_RenderClear(renderer);
 
   // Draw background
-  SDL_Rect bg_rect = {0, 0, SCENE_WIDTH, SCENE_HEIGHT};
-  SDL_RenderCopy(renderer, background, &camera, nullptr);
+  // SDL_Rect bg_rect = {0, 0, SCENE_WIDTH, SCENE_HEIGHT};
+  // SDL_RenderCopy(renderer, background, &camera, nullptr);
+  tile_handler->draw(renderer, camera);
   for (auto obj : game_objects)
     obj->render(camera);
 
