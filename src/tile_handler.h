@@ -12,7 +12,7 @@ public:
   TileHandler(SDL_Renderer *renderer, const std::string &tilemap_filepath,
               const std::string &tileset_filepath);
   ~TileHandler();
-  bool is_visible(int x, int y);
+  bool is_visible(int x, int y, SDL_Rect camera);
   void render(SDL_Renderer *renderer, SDL_Rect camera);
 
 private:

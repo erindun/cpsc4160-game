@@ -25,14 +25,23 @@ TileHandler::TileHandler(SDL_Renderer *renderer,
 }
 
 void TileHandler::render(SDL_Renderer *renderer, SDL_Rect camera) {
-  for (int i = 0; i < NUM_TILES; i++) {
-    for (int j = 0; j < NUM_TILES; j++) {
-      SDL_Rect dstrect = {j * TILE_SIZE - camera.x, i * TILE_SIZE - camera.y,
+  for (int y = 0; y < NUM_TILES; y++) {
+    for (int x = 0; x < NUM_TILES; x++) {
+      if (!is_visible(x, y, camera))
+        continue;
+      SDL_Rect dstrect = {x * TILE_SIZE - camera.x, y * TILE_SIZE - camera.y,
                           TILE_SIZE, TILE_SIZE};
-      SDL_Rect srcrect = {(tiles.at(i).at(j) % TILES_PER_ROW) * TILE_SIZE,
-                          (tiles.at(i).at(j) / TILES_PER_ROW) * TILE_SIZE,
+      SDL_Rect srcrect = {(tiles.at(y).at(x) % TILES_PER_ROW) * TILE_SIZE,
+                          (tiles.at(y).at(x) / TILES_PER_ROW) * TILE_SIZE,
                           TILE_SIZE, TILE_SIZE};
       SDL_RenderCopy(renderer, tileset, &srcrect, &dstrect);
     }
   }
+}
+
+bool TileHandler::is_visible(int x, int y, SDL_Rect camera) { 
+    int x_pos = x * TILE_SIZE;
+    int y_pos = y * TILE_SIZE;
+    // Render additional row on lower bounds to ensure screen will always be covered with tiles.
+    return (x_pos + TILE_SIZE) >= camera.x && x_pos <= camera.x + camera.w && (y_pos + TILE_SIZE) >= camera.y && y_pos <= camera.y + camera.h;
 }
