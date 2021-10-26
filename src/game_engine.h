@@ -20,14 +20,13 @@ public:
   bool get_is_running();
 
 private:
-  void init_SDL();
-
   SDL_Window *window;
   SDL_Renderer *renderer;
   SDL_Texture *background;
   bool is_running;
   InputHandler input_handler;
   TileHandler *tile_handler;
+  GraphicsHandler *graphics_handler;
   std::list<GameObject *> game_objects;
   Character *player;
   SDL_Rect camera;

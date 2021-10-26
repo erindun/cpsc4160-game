@@ -1,6 +1,7 @@
 #include "game_engine.h"
 #include "character.h"
 #include "constants.h"
+#include "graphics_handler.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
@@ -13,36 +14,16 @@ GameEngine::GameEngine()
 
 GameEngine::~GameEngine() {}
 
-// TODO improve error handling/logging
-void GameEngine::init_SDL() {
-  if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-    std::cout << "Error initializing SDL: " << SDL_GetError() << std::endl;
-    exit(1);
-  }
-
-  // Enable gpu_enhanced textures
-  IMG_Init(IMG_INIT_PNG);
-
-  window = SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED,
-                            SDL_WINDOWPOS_CENTERED, VIEW_WIDTH * 2,
-                            VIEW_HEIGHT * 2, 0);
-  renderer = SDL_CreateRenderer(window, -1, 0);
-
-  if (window == nullptr || renderer == nullptr) {
-    exit(2);
-  }
-  SDL_RenderSetLogicalSize(renderer, 640, 360);
-}
-
 void GameEngine::init() {
-  init_SDL();
+  graphics_handler = new GraphicsHandler();
   is_running = true;
 
   player = new Character(new Sprite("../../assets/cat.png", renderer),
                          Vec2{VIEW_WIDTH / 2, VIEW_HEIGHT / 2});
   game_objects.push_back(player);
 
-  tile_handler = new TileHandler(renderer, "../../assets/tilemap.csv", "../../assets/tileset.png");
+  tile_handler = new TileHandler(renderer, "../../assets/tilemap.csv",
+                                 "../../assets/tileset.png");
 }
 
 void GameEngine::handle_input() { input_handler.handle(*player, is_running); }

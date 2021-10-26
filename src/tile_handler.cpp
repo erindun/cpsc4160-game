@@ -21,7 +21,7 @@ TileHandler::TileHandler(SDL_Renderer *renderer,
     }
   }
 
-  tileset = load_texture(renderer, tileset_filepath);
+  tileset =  new Sprite2(// load_texture(renderer, tileset_filepath);
 }
 
 void TileHandler::render(SDL_Renderer *renderer, SDL_Rect camera) {

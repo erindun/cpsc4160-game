@@ -6,6 +6,11 @@
 #include <iostream>
 using vec2::Vec2;
 
+Sprite2::Sprite2(const std::string &filepath, int width, int height) {
+  texture = graphics_handler.load_texture(filepath);
+  rect = {0, 0, width, height};
+}
+
 Sprite::Sprite(const std::string &filepath, SDL_Renderer *renderer)
     : current_frame{0}, renderer{renderer},
       srcrect{0, 0, FRAME_WIDTH, FRAME_HEIGHT}, dstrect{0, 0, FRAME_WIDTH,

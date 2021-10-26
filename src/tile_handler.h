@@ -17,5 +17,5 @@ public:
 
 private:
   std::array<std::array<int, 50>, 50> tiles;
-  SDL_Texture *tileset;
+  Sprite2 *tileset;
 };
