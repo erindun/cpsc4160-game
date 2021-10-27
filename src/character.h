@@ -1,4 +1,5 @@
 #pragma once
+#include "character_sprite_handler.h"
 #include "character_state.h"
 #include "game_object.h"
 #include "sprite.h"
@@ -24,5 +25,6 @@ public:
 
 private:
   Sprite *sprite;
+  CharacterSpriteHandler *sprite_handler;
   CharacterState state;
 };

@@ -8,8 +8,10 @@
 using vec2::Vec2;
 
 Character::Character(Sprite *sprite, Vec2 position)
-    : position{position}, direction{vec2::down}, velocity{vec2::zero},
-      sprite{sprite}, state{CharacterState::idle} {}
+    : sprite{sprite}, position{position}, direction{vec2::down},
+      velocity{vec2::zero}, state{CharacterState::idle} {
+  sprite_handler = new CharacterSpriteHandler(sprite);
+}
 
 Character::~Character() {}
 
@@ -28,7 +30,7 @@ void Character::update() {
     }
   }
   position += velocity * (MOVE_SPEED - dampen);
-  sprite->update(position, direction, state);
+  sprite_handler->update(position, direction, state);
 }
 
 void Character::render(SDL_Rect camera) { sprite->render(camera); }

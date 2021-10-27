@@ -1,5 +1,6 @@
 #include "game_engine.h"
 #include "character.h"
+#include "character_sprite_handler.h"
 #include "constants.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -38,11 +39,14 @@ void GameEngine::init() {
   init_SDL();
   is_running = true;
 
-  player = new Character(new Sprite("../../assets/cat.png", renderer),
+  player = new Character(new Sprite("../../assets/cat.png", renderer,
+                                    CharacterSpriteHandler::FRAME_WIDTH,
+                                    CharacterSpriteHandler::FRAME_HEIGHT),
                          Vec2{VIEW_WIDTH / 2, VIEW_HEIGHT / 2});
   game_objects.push_back(player);
 
-  tile_handler = new TileHandler(renderer, "../../assets/tilemap.csv", "../../assets/tileset.png");
+  tile_handler = new TileHandler(renderer, "../../assets/tilemap.csv",
+                                 "../../assets/tileset.png");
 }
 
 void GameEngine::handle_input() { input_handler.handle(*player, is_running); }
@@ -52,8 +56,10 @@ void GameEngine::update() {
     obj->update();
 
   // Set the camera to follow the player.
-  camera.x = (player->position.x + Sprite::FRAME_WIDTH / 2) - VIEW_WIDTH / 2;
-  camera.y = (player->position.y + Sprite::FRAME_WIDTH / 2) - VIEW_HEIGHT / 2;
+  camera.x = (player->position.x + CharacterSpriteHandler::FRAME_WIDTH / 2) -
+             VIEW_WIDTH / 2;
+  camera.y = (player->position.y + CharacterSpriteHandler::FRAME_WIDTH / 2) -
+             VIEW_HEIGHT / 2;
 
   // Clamp the camera within the screen.
   if (camera.x < 0)
