@@ -1,5 +1,4 @@
 #include "tile_handler.h"
-#include "utils.h"
 #include <SDL_image.h>
 #include <fstream>
 #include <iostream>
@@ -21,7 +20,7 @@ TileHandler::TileHandler(SDL_Renderer *renderer,
     }
   }
 
-  tileset = load_texture(renderer, tileset_filepath);
+  tileset = new Sprite(tileset_filepath, renderer, TILE_SIZE, TILE_SIZE);
 }
 
 void TileHandler::render(SDL_Renderer *renderer, SDL_Rect camera) {
@@ -29,12 +28,12 @@ void TileHandler::render(SDL_Renderer *renderer, SDL_Rect camera) {
     for (int x = 0; x < NUM_TILES; x++) {
       if (!is_visible(x, y, camera))
         continue;
-      SDL_Rect dstrect = {x * TILE_SIZE - camera.x, y * TILE_SIZE - camera.y,
-                          TILE_SIZE, TILE_SIZE};
-      SDL_Rect srcrect = {(tiles.at(y).at(x) % TILES_PER_ROW) * TILE_SIZE,
-                          (tiles.at(y).at(x) / TILES_PER_ROW) * TILE_SIZE,
-                          TILE_SIZE, TILE_SIZE};
-      SDL_RenderCopy(renderer, tileset, &srcrect, &dstrect);
+
+      tileset->set_dstrect_pos(x * TILE_SIZE,
+                               y * TILE_SIZE);
+      tileset->set_srcrect_pos((tiles.at(y).at(x) % TILES_PER_ROW) * TILE_SIZE,
+                          (tiles.at(y).at(x) / TILES_PER_ROW) * TILE_SIZE);
+      tileset->render(camera);
     }
   }
 }

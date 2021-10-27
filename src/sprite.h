@@ -27,10 +27,12 @@ public:
   }
 
   SDL_RendererFlip flip;
+  SDL_Texture *texture;
 
 private:
+  SDL_Texture *load_texture(SDL_Renderer *renderer,
+                            const std::string &filepath);
   SDL_Renderer *renderer;
-  SDL_Texture *texture;
   SDL_Rect srcrect;
   SDL_Rect dstrect;
 };

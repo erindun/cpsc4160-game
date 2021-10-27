@@ -1,4 +1,5 @@
 #pragma once
+#include "sprite.h"
 #include <SDL.h>
 #include <array>
 #include <string>
@@ -6,6 +7,7 @@
 class TileHandler {
 public:
   static const int TILES_PER_ROW = 8;
+  static const int NUM_ROWS = 2;
   static const int TILE_SIZE = 16;
   static const int NUM_TILES = 50;
 
@@ -17,5 +19,5 @@ public:
 
 private:
   std::array<std::array<int, 50>, 50> tiles;
-  SDL_Texture *tileset;
+  Sprite *tileset;
 };

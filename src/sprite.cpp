@@ -1,5 +1,4 @@
 #include "sprite.h"
-#include "utils.h"
 #include "vec2.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -19,4 +18,19 @@ void Sprite::render(SDL_Rect camera) {
   SDL_Rect draw_rect = {dstrect.x - camera.x, dstrect.y - camera.y, dstrect.w,
                         dstrect.h};
   SDL_RenderCopyEx(renderer, texture, &srcrect, &draw_rect, 0, nullptr, flip);
+}
+
+SDL_Texture *Sprite::load_texture(SDL_Renderer *renderer, const std::string &filepath) {
+  SDL_Surface *surface = IMG_Load(filepath.c_str());
+  SDL_Texture *texture = nullptr;
+  if (surface == nullptr) {
+    std::cout << IMG_GetError() << std::endl;
+  } else {
+    texture = SDL_CreateTextureFromSurface(renderer, surface);
+    if (texture == nullptr) {
+      std::cout << SDL_GetError() << std::endl;
+    }
+  }
+  SDL_FreeSurface(surface);
+  return texture;
 }
