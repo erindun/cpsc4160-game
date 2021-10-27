@@ -2,9 +2,11 @@
 #include "character.h"
 #include "character_sprite_handler.h"
 #include "constants.h"
+#include "rat.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
+#include <vector>
 using vec2::Vec2;
 
 GameEngine::GameEngine()
@@ -38,6 +40,19 @@ void GameEngine::init_SDL() {
 void GameEngine::init() {
   init_SDL();
   is_running = true;
+
+  std::vector<GameObject *> rats;
+
+  // Create grid of rats.
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 10; j++) {
+      auto rat =
+          new Rat(new Sprite("../../assets/rat.png", renderer, 16, 16),
+                  Vec2{VIEW_WIDTH / 2 + j * 40, VIEW_WIDTH / 2 + i * 40});
+      rats.push_back(rat);
+    }
+  }
+  game_objects.insert(game_objects.begin(), rats.begin(), rats.end());
 
   player = new Character(new Sprite("../../assets/cat.png", renderer,
                                     CharacterSpriteHandler::FRAME_WIDTH,

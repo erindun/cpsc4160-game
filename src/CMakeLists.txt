@@ -20,6 +20,6 @@ add_executable (my_game "main.cpp"
                      "character_sprite_handler.h"
                      "character_sprite_handler.cpp"
                      "tile_handler.h"
-                     "tile_handler.cpp")
+                     "tile_handler.cpp" "rat.h" "rat.cpp")
 
 target_link_libraries(my_game ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
