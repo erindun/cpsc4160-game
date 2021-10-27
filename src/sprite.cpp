@@ -5,6 +5,7 @@
 #include <iostream>
 using vec2::Vec2;
 
+/// A sprite within the game.
 Sprite::Sprite(const std::string &filepath, SDL_Renderer *renderer, int width,
                int height)
     : renderer{renderer}, srcrect{0, 0, width, height},
@@ -20,7 +21,8 @@ void Sprite::render(SDL_Rect camera) {
   SDL_RenderCopyEx(renderer, texture, &srcrect, &draw_rect, 0, nullptr, flip);
 }
 
-SDL_Texture *Sprite::load_texture(SDL_Renderer *renderer, const std::string &filepath) {
+SDL_Texture *Sprite::load_texture(SDL_Renderer *renderer,
+                                  const std::string &filepath) {
   SDL_Surface *surface = IMG_Load(filepath.c_str());
   SDL_Texture *texture = nullptr;
   if (surface == nullptr) {

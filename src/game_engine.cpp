@@ -47,21 +47,21 @@ void GameEngine::init() {
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 10; j++) {
       auto rat =
-          new Rat(new Sprite("../../assets/rat.png", renderer, 16, 16),
+          new Rat(new Sprite("../assets/rat.png", renderer, 16, 16),
                   Vec2{VIEW_WIDTH / 2 + j * 40, VIEW_WIDTH / 2 + i * 40});
       rats.push_back(rat);
     }
   }
   game_objects.insert(game_objects.begin(), rats.begin(), rats.end());
 
-  player = new Character(new Sprite("../../assets/cat.png", renderer,
+  player = new Character(new Sprite("../assets/cat.png", renderer,
                                     CharacterSpriteHandler::FRAME_WIDTH,
                                     CharacterSpriteHandler::FRAME_HEIGHT),
                          Vec2{VIEW_WIDTH / 2, VIEW_HEIGHT / 2});
   game_objects.push_back(player);
 
-  tile_handler = new TileHandler(renderer, "../../assets/tilemap.csv",
-                                 "../../assets/tileset.png");
+  tile_handler = new TileHandler(renderer, "../assets/tilemap.csv",
+                                 "../assets/tileset.png");
 }
 
 void GameEngine::handle_input() { input_handler.handle(*player, is_running); }

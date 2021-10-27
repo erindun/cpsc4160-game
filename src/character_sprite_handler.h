@@ -3,6 +3,7 @@
 #include "sprite.h"
 #include "vec2.h"
 
+/// Animates a Sprite for a Character game object.
 class CharacterSpriteHandler {
 public:
   static const int FRAME_WIDTH = 25;

@@ -4,6 +4,7 @@
 #include <array>
 #include <string>
 
+/// Renders background tiles as specified by a tilemap.
 class TileHandler {
 public:
   static const int TILES_PER_ROW = 8;

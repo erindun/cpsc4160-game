@@ -29,18 +29,19 @@ void TileHandler::render(SDL_Renderer *renderer, SDL_Rect camera) {
       if (!is_visible(x, y, camera))
         continue;
 
-      tileset->set_dstrect_pos(x * TILE_SIZE,
-                               y * TILE_SIZE);
+      tileset->set_dstrect_pos(x * TILE_SIZE, y * TILE_SIZE);
       tileset->set_srcrect_pos((tiles.at(y).at(x) % TILES_PER_ROW) * TILE_SIZE,
-                          (tiles.at(y).at(x) / TILES_PER_ROW) * TILE_SIZE);
+                               (tiles.at(y).at(x) / TILES_PER_ROW) * TILE_SIZE);
       tileset->render(camera);
     }
   }
 }
 
-bool TileHandler::is_visible(int x, int y, SDL_Rect camera) { 
-    int x_pos = x * TILE_SIZE;
-    int y_pos = y * TILE_SIZE;
-    // Render additional row on lower bounds to ensure screen will always be covered with tiles.
-    return (x_pos + TILE_SIZE) >= camera.x && x_pos <= camera.x + camera.w && (y_pos + TILE_SIZE) >= camera.y && y_pos <= camera.y + camera.h;
+bool TileHandler::is_visible(int x, int y, SDL_Rect camera) {
+  int x_pos = x * TILE_SIZE;
+  int y_pos = y * TILE_SIZE;
+  // Render additional row on lower bounds to ensure screen will always be
+  // covered with tiles.
+  return (x_pos + TILE_SIZE) >= camera.x && x_pos <= camera.x + camera.w &&
+         (y_pos + TILE_SIZE) >= camera.y && y_pos <= camera.y + camera.h;
 }
