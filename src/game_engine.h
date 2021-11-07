@@ -28,6 +28,7 @@ private:
   bool is_running;
   InputHandler input_handler;
   TileHandler *tile_handler;
+  CollisionHandler collision_handler;
   std::list<GameObject *> game_objects;
   Character *player;
   SDL_Rect camera;

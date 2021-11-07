@@ -25,6 +25,8 @@ add_executable (my_game "src/main.cpp"
                      "src/tile_handler.h"
                      "src/tile_handler.cpp"
                      "src/rat.h"
-                     "src/rat.cpp")
+                     "src/rat.cpp"
+                     "src/collision_handler.h"
+                     "src/collidable.h" "src/collision_handler.cpp")
 
 target_link_libraries(my_game ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})

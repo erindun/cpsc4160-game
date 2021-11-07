@@ -50,14 +50,16 @@ void GameEngine::init() {
           new Rat(new Sprite("../assets/rat.png", renderer, 16, 16),
                   Vec2{VIEW_WIDTH / 2 + j * 40, VIEW_WIDTH / 2 + i * 40});
       rats.push_back(rat);
+      collision_handler.register_obj(rat);
     }
   }
   game_objects.insert(game_objects.begin(), rats.begin(), rats.end());
 
-  player = new Character(new Sprite("../assets/cat.png", renderer,
-                                    CharacterSpriteHandler::FRAME_WIDTH,
-                                    CharacterSpriteHandler::FRAME_HEIGHT),
-                         Vec2{VIEW_WIDTH / 2, VIEW_HEIGHT / 2});
+  player =
+      new Character(new Sprite("../assets/cat.png", renderer,
+                               CharacterSpriteHandler::FRAME_WIDTH,
+                               CharacterSpriteHandler::FRAME_HEIGHT),
+                    Vec2{VIEW_WIDTH / 2, VIEW_HEIGHT / 2}, collision_handler);
   game_objects.push_back(player);
 
   tile_handler = new TileHandler(renderer, "../assets/tilemap.csv",

@@ -1,9 +1,9 @@
-#include "game_object.h"
+#include "collidable.h"
 #include "sprite.h"
 #include "vec2.h"
 #include <SDL.h>
 
-class Rat : public GameObject {
+class Rat : public Collidable {
 public:
   Rat(Sprite *sprite, vec2::Vec2 position);
   void update() override {}

@@ -5,12 +5,7 @@
 #include <SDL2/SDL.h>
 #include <string>
 
-/// A sprite for a Character game object.
-///
-/// Eventually, I plan to generalize this
-/// class sprites that are _not_ Character
-/// objects.
-
+/// A sprite for a game object.
 class Sprite {
 public:
   Sprite(const std::string &filepath, SDL_Renderer *renderer, int width,
@@ -25,6 +20,7 @@ public:
     dstrect.x = x;
     dstrect.y = y;
   }
+  SDL_Rect get_dstrect() { return dstrect; }
 
   SDL_RendererFlip flip;
   SDL_Texture *texture;
