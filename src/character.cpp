@@ -32,12 +32,15 @@ void Character::update() {
       direction.y = 0;
     }
   }
+  bool collided = false;
   if (collision_handler.detect_collisions(get_collider())) {
-      velocity.x += -velocity.x;
-      velocity.y += -velocity.y;
+      velocity.x = -velocity.x;
+      velocity.y = -velocity.y;
+      collided = true;
   }
   position += velocity * (MOVE_SPEED - dampen);
   sprite_handler->update(position, direction, state);
+  if (collided) velocity = vec2::zero;
   collider = sprite->get_dstrect();
 }
 
