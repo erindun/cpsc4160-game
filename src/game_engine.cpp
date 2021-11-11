@@ -3,6 +3,7 @@
 #include "character_sprite_handler.h"
 #include "constants.h"
 #include "rat.h"
+#include "tree.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
@@ -11,8 +12,8 @@ using vec2::Vec2;
 
 GameEngine::GameEngine()
     : window{nullptr}, renderer{nullptr}, background{nullptr},
-      is_running{false}, player{nullptr},
-      tile_handler{nullptr}, camera{0, 0, VIEW_WIDTH, VIEW_HEIGHT} {}
+      is_running{false}, player{nullptr}, tile_handler{nullptr},
+      camera{0, 0, VIEW_WIDTH, VIEW_HEIGHT}, rain_emitter{nullptr} {}
 
 GameEngine::~GameEngine() {}
 
@@ -53,7 +54,13 @@ void GameEngine::init() {
       collision_handler.register_obj(rat);
     }
   }
+  
+  auto tree = new Tree(new Sprite("../assets/tree.png", renderer, 64, 64),
+                       Vec2{200, 80});
+  collision_handler.register_obj(tree);
+
   game_objects.insert(game_objects.begin(), rats.begin(), rats.end());
+  game_objects.push_back(tree);
 
   player =
       new Character(new Sprite("../assets/cat.png", renderer,
@@ -64,6 +71,8 @@ void GameEngine::init() {
 
   tile_handler = new TileHandler(renderer, "../assets/tilemap.csv",
                                  "../assets/tileset.png");
+
+  rain_emitter = new ParticleEmitter(ParticleEffect::rain, renderer);
 }
 
 void GameEngine::handle_input() { input_handler.handle(*player, is_running); }
@@ -87,6 +96,8 @@ void GameEngine::update() {
     camera.x = SCENE_WIDTH - VIEW_WIDTH;
   if (camera.y + camera.h >= SCENE_HEIGHT)
     camera.y = SCENE_HEIGHT - VIEW_HEIGHT;
+
+  rain_emitter->update();
 }
 
 void GameEngine::render() {
@@ -96,6 +107,7 @@ void GameEngine::render() {
   for (auto obj : game_objects)
     obj->render(camera);
 
+  rain_emitter->render(camera);
   SDL_RenderPresent(renderer);
 }
 

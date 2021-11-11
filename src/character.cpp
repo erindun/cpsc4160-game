@@ -18,6 +18,7 @@ Character::Character(Sprite *sprite, Vec2 position,
 
 Character::~Character() {}
 
+// TODO extract a `move` function
 void Character::update() {
   int dampen = 0;
   if (velocity == vec2::zero)

@@ -5,6 +5,7 @@
 #include "input_handler.h"
 #include "tile_handler.h"
 #include "vec2.h"
+#include "particle.h"
 #include <SDL2/SDL.h>
 #include <list>
 
@@ -32,4 +33,5 @@ private:
   std::list<GameObject *> game_objects;
   Character *player;
   SDL_Rect camera;
+  ParticleEmitter *rain_emitter;
 };
