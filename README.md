@@ -1,4 +1,4 @@
-# Assignment 3: Picture this! (CPSC 4160 Fall 2021 - Garrett Duncan)
+# Assignment 4: Adding particle effects and colliders (CPSC 4160 Fall 2021 - Garrett Duncan)
 
 This program is a demo of what will become my collection game. All artwork was created by me.
 My initial idea is for mice to run across the screen, and you must "hunt" as many as you can
