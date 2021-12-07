@@ -19,6 +19,7 @@ public:
   void render();
   void quit();
   bool get_is_running();
+  bool is_paused;
 
 private:
   void init_SDL();

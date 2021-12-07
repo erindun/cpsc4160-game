@@ -12,8 +12,8 @@ using vec2::Vec2;
 
 GameEngine::GameEngine()
     : window{nullptr}, renderer{nullptr}, background{nullptr},
-      is_running{false}, player{nullptr}, tile_handler{nullptr},
-      camera{0, 0, VIEW_WIDTH, VIEW_HEIGHT}, rain_emitter{nullptr} {}
+      is_running{false}, player{nullptr}, tile_handler{nullptr}, camera{0, 0, VIEW_WIDTH, VIEW_HEIGHT},
+      rain_emitter{nullptr}, is_paused{false} {}
 
 GameEngine::~GameEngine() {}
 
@@ -54,7 +54,7 @@ void GameEngine::init() {
       collision_handler.register_obj(rat);
     }
   }
-  
+
   auto tree = new Tree(new Sprite("../assets/tree.png", renderer, 64, 64),
                        Vec2{200, 80});
   collision_handler.register_obj(tree);
@@ -75,7 +75,7 @@ void GameEngine::init() {
   rain_emitter = new ParticleEmitter(ParticleEffect::rain, renderer);
 }
 
-void GameEngine::handle_input() { input_handler.handle(*player, is_running); }
+void GameEngine::handle_input() { input_handler.handle(*player, is_running, is_paused); }
 
 void GameEngine::update() {
   for (auto obj : game_objects)
