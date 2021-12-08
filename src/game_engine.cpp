@@ -6,6 +6,7 @@
 #include "tree.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include <vector>
 using vec2::Vec2;
@@ -27,6 +28,8 @@ void GameEngine::init_SDL() {
 
   // Enable gpu_enhanced textures
   IMG_Init(IMG_INIT_PNG);
+
+  TTF_Init();
 
   window = SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED,
                             SDL_WINDOWPOS_CENTERED, VIEW_WIDTH * 2,
