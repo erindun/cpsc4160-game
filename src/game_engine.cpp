@@ -12,7 +12,8 @@ using vec2::Vec2;
 
 GameEngine::GameEngine()
     : window{nullptr}, renderer{nullptr}, background{nullptr},
-      is_running{false}, player{nullptr}, tile_handler{nullptr}, camera{0, 0, VIEW_WIDTH, VIEW_HEIGHT},
+      is_running{false}, player{nullptr},
+      tile_handler{nullptr}, camera{0, 0, VIEW_WIDTH, VIEW_HEIGHT},
       rain_emitter{nullptr}, is_paused{false} {}
 
 GameEngine::~GameEngine() {}
@@ -45,7 +46,7 @@ void GameEngine::init() {
   std::vector<GameObject *> rats;
 
   // Create grid of rats.
-  //for (int i = 0; i < 3; i++) {
+  // for (int i = 0; i < 3; i++) {
   //  for (int j = 0; j < 10; j++) {
   //    auto rat =
   //        new Rat(new Sprite("../assets/rat.png", renderer, 16, 16),
@@ -75,9 +76,13 @@ void GameEngine::init() {
   rain_emitter = new ParticleEmitter(ParticleEffect::rain, renderer);
 
   rat_handler = new RatHandler(renderer, game_objects, &collision_handler);
+
+  ui_handler = new UIHandler(renderer);
 }
 
-void GameEngine::handle_input() { input_handler.handle(*player, is_running, is_paused); }
+void GameEngine::handle_input() {
+  input_handler.handle(*player, is_running, is_paused);
+}
 
 void GameEngine::update() {
   for (auto obj : game_objects)
@@ -88,7 +93,6 @@ void GameEngine::update() {
              VIEW_WIDTH / 2;
   camera.y = (player->position.y + CharacterSpriteHandler::FRAME_WIDTH / 2) -
              VIEW_HEIGHT / 2;
-
 
   if (player->lives == 0) {
     is_paused = true;
@@ -117,6 +121,9 @@ void GameEngine::render() {
     obj->render(camera);
 
   rain_emitter->render(camera);
+
+  if (is_paused)
+    render_pause();
   SDL_RenderPresent(renderer);
 }
 
@@ -125,6 +132,12 @@ void GameEngine::quit() {
   SDL_DestroyWindow(window);
   IMG_Quit();
   SDL_Quit();
+}
+
+void GameEngine::render_pause() {
+  // SDL_RenderClear(renderer);
+  ui_handler->render();
+  // SDL_RenderPresent(renderer);
 }
 
 bool GameEngine::get_is_running() { return is_running; }

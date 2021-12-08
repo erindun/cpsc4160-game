@@ -17,9 +17,10 @@ int main(int argc, char *argv[]) {
   while (engine->get_is_running()) {
     auto ticks = SDL_GetTicks();
     engine->handle_input();
+
+    engine->render();
     if (!engine->is_paused) {
       engine->update();
-      engine->render();
     }
 
     ++fps_counter;

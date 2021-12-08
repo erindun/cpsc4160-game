@@ -3,11 +3,12 @@
 #include "character.h"
 #include "game_object.h"
 #include "input_handler.h"
-#include "tile_handler.h"
-#include "vec2.h"
 #include "particle.h"
-#include <SDL2/SDL.h>
 #include "rat.h"
+#include "tile_handler.h"
+#include "ui_handler.h"
+#include "vec2.h"
+#include <SDL2/SDL.h>
 #include <list>
 
 class GameEngine {
@@ -21,6 +22,7 @@ public:
   void quit();
   bool get_is_running();
   bool is_paused;
+  void render_pause();
 
 private:
   void init_SDL();
@@ -37,4 +39,5 @@ private:
   Character *player;
   SDL_Rect camera;
   ParticleEmitter *rain_emitter;
+  UIHandler *ui_handler;
 };
