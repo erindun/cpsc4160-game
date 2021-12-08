@@ -89,6 +89,12 @@ void GameEngine::update() {
   camera.y = (player->position.y + CharacterSpriteHandler::FRAME_WIDTH / 2) -
              VIEW_HEIGHT / 2;
 
+
+  if (player->lives == 0) {
+    is_paused = true;
+    std::cout << "GAME OVER" << std::endl;
+  }
+
   // Clamp the camera within the screen.
   if (camera.x < 0)
     camera.x = 0;

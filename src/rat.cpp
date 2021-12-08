@@ -63,6 +63,7 @@ void RatHandler::update() {
     auto rat = new Rat(renderer);
     rats.push_back(rat);
     game_objects.push_back(rat);
+    collision_handler->register_obj(rat);
   }
    
   for (auto rat : rats) {

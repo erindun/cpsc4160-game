@@ -24,10 +24,12 @@ public:
   vec2::Vec2 position;
   vec2::Vec2 direction;
   vec2::Vec2 velocity;
+  int lives;
 
 private:
   Sprite *sprite;
   CharacterSpriteHandler *sprite_handler;
   CharacterState state;
   CollisionHandler &collision_handler;
+  int last_collision;
 };
