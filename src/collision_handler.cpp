@@ -9,6 +9,11 @@ bool CollisionHandler::detect_collisions(SDL_Rect a) {
 
 void CollisionHandler::register_obj(Collidable *collidable) { collidables.push_back(collidable); }
 
+void CollisionHandler::deregister_obj(Collidable *collidable) {
+  collidables.remove(collidable);
+}
+
+
 bool CollisionHandler::box_collide(SDL_Rect a, SDL_Rect b) {
   if (a.x + a.w < b.x)
     return false;

@@ -45,15 +45,15 @@ void GameEngine::init() {
   std::vector<GameObject *> rats;
 
   // Create grid of rats.
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 10; j++) {
-      auto rat =
-          new Rat(new Sprite("../assets/rat.png", renderer, 16, 16),
-                  Vec2{VIEW_WIDTH / 2 + j * 40, VIEW_WIDTH / 2 + i * 40});
-      rats.push_back(rat);
-      collision_handler.register_obj(rat);
-    }
-  }
+  //for (int i = 0; i < 3; i++) {
+  //  for (int j = 0; j < 10; j++) {
+  //    auto rat =
+  //        new Rat(new Sprite("../assets/rat.png", renderer, 16, 16),
+  //                Vec2{VIEW_WIDTH / 2 + j * 40, VIEW_WIDTH / 2 + i * 40});
+  //    rats.push_back(rat);
+  //    collision_handler.register_obj(rat);
+  //  }
+  //}
 
   auto tree = new Tree(new Sprite("../assets/tree.png", renderer, 64, 64),
                        Vec2{200, 80});
@@ -73,6 +73,8 @@ void GameEngine::init() {
                                  "../assets/tileset.png");
 
   rain_emitter = new ParticleEmitter(ParticleEffect::rain, renderer);
+
+  rat_handler = new RatHandler(renderer, game_objects, &collision_handler);
 }
 
 void GameEngine::handle_input() { input_handler.handle(*player, is_running, is_paused); }
@@ -98,6 +100,7 @@ void GameEngine::update() {
     camera.y = SCENE_HEIGHT - VIEW_HEIGHT;
 
   rain_emitter->update();
+  rat_handler->update();
 }
 
 void GameEngine::render() {

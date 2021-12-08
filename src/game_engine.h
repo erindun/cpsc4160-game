@@ -7,6 +7,7 @@
 #include "vec2.h"
 #include "particle.h"
 #include <SDL2/SDL.h>
+#include "rat.h"
 #include <list>
 
 class GameEngine {
@@ -31,6 +32,7 @@ private:
   InputHandler input_handler;
   TileHandler *tile_handler;
   CollisionHandler collision_handler;
+  RatHandler *rat_handler;
   std::list<GameObject *> game_objects;
   Character *player;
   SDL_Rect camera;
