@@ -125,6 +125,8 @@ void GameEngine::render() {
 
   rain_emitter->render(camera);
 
+  ui_handler->render_score();
+
   if (is_paused)
     render_pause();
   SDL_RenderPresent(renderer);

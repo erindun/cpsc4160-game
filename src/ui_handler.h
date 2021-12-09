@@ -17,8 +17,11 @@ class UIHandler {
 public:
   UIHandler(SDL_Renderer *renderer);
   void render();
+  void render_score();
 
 private:
   SDL_Renderer *renderer;
   Text *pause_text;
+  Text *score_text;
+  SDL_Rect fullscreen_rect;
 };
