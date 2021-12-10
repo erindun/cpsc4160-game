@@ -6,12 +6,12 @@
 #include <string>
 
 UIHandler::UIHandler(SDL_Renderer *renderer) : renderer{renderer} {
-  // Offset pause_text by 40 to account for the (approximate) width of the text.
-  // TODO handle this more elegantly
+  // Text manually offset based on width of text. Ideally, this would be handled
+  // automatically
   start_text = new Text("../assets/munro.ttf", "PRESS ENTER TO START", renderer,
-                        VIEW_WIDTH / 2 - 40, VIEW_HEIGHT / 2);
-  end_text = new Text("../assets/munro.ttf", "GAME OVER :(", renderer,
-                        VIEW_WIDTH / 2 - 40, VIEW_HEIGHT / 2);
+                        VIEW_WIDTH / 2 - 140, VIEW_HEIGHT / 2);
+  end_text = new Text("../assets/munro.ttf", "GAME OVER!", renderer,
+                        VIEW_WIDTH / 2 - 80, VIEW_HEIGHT / 2);
   pause_text = new Text("../assets/munro.ttf", "PAUSED", renderer,
                         VIEW_WIDTH / 2 - 40, VIEW_HEIGHT / 2);
   score_text = new Text("../assets/munro.ttf", "LIVES: 9", renderer, 5, 0);

@@ -1,11 +1,15 @@
-# Assignment 4: Adding particle effects and colliders (CPSC 4160 Fall 2021 - Garrett Duncan)
+# Assignment 5: Finish your game! (CPSC 4160 Fall 2021 - Garrett Duncan)
 
-This program is a demo of what will become my collection game. All artwork was created by me.
-My initial idea is for mice to run across the screen, and you must "hunt" as many as you can
-within a timeframe.
+Scaredy Cat: see how long you can avoid the horde of rats!
 
 The character can be controlled in 8-directions using WASD or the arrow keys. The ESC
-key terminates the program.
+key pauses the game.
+
+I selected the following components:
+- Start/finish screens
+- In-play UI: "Lives" heads-up item and pause menu
+- Textual items with fonts
+
 
 I used CMake to build and deploy the project between Linux and Windows systems. The following commands will build and run the game:
 ```

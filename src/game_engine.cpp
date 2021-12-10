@@ -49,24 +49,6 @@ void GameEngine::init() {
 
   std::vector<GameObject *> rats;
 
-  // Create grid of rats.
-  // for (int i = 0; i < 3; i++) {
-  //  for (int j = 0; j < 10; j++) {
-  //    auto rat =
-  //        new Rat(new Sprite("../assets/rat.png", renderer, 16, 16),
-  //                Vec2{VIEW_WIDTH / 2 + j * 40, VIEW_WIDTH / 2 + i * 40});
-  //    rats.push_back(rat);
-  //    collision_handler.register_obj(rat);
-  //  }
-  //}
-
-  auto tree = new Tree(new Sprite("../assets/tree.png", renderer, 64, 64),
-                       Vec2{200, 80});
-  collision_handler.register_obj(tree);
-
-  game_objects.insert(game_objects.begin(), rats.begin(), rats.end());
-  game_objects.push_back(tree);
-
   player =
       new Character(new Sprite("../assets/cat.png", renderer,
                                CharacterSpriteHandler::FRAME_WIDTH,
@@ -118,7 +100,7 @@ void GameEngine::update() {
   if (camera.y + camera.h >= SCENE_HEIGHT)
     camera.y = SCENE_HEIGHT - VIEW_HEIGHT;
 
-  rain_emitter->update();
+  //rain_emitter->update();
   rat_handler->update();
 }
 
@@ -129,7 +111,7 @@ void GameEngine::render() {
   for (auto obj : game_objects)
     obj->render(camera);
 
-  rain_emitter->render(camera);
+  //rain_emitter->render(camera);
 
   ui_handler->render_score();
 
@@ -151,9 +133,7 @@ void GameEngine::quit() {
 }
 
 void GameEngine::render_pause() {
-  // SDL_RenderClear(renderer);
   ui_handler->render();
-  // SDL_RenderPresent(renderer);
 }
 
 bool GameEngine::get_is_running() { return is_running; }

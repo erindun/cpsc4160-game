@@ -18,18 +18,26 @@ void Rat::new_spawn() {
   case spawn_location::Up:
     pos = {rand() % SCENE_WIDTH, 0 - delay};
     vel = vec2::down;
+    sprite->flip = SDL_FLIP_NONE;
+    sprite->angle = 0.0;
     break;
   case spawn_location::Down:
     pos = {rand() % SCENE_WIDTH, SCENE_HEIGHT + delay};
     vel = vec2::up;
+    sprite->flip = SDL_FLIP_VERTICAL;
+    sprite->angle = 0.0;
     break;
   case spawn_location::Left:
     pos = {0 - delay, rand() % SCENE_HEIGHT};
     vel = vec2::right;
+    sprite->flip = SDL_FLIP_NONE;
+    sprite->angle = 270.0;
     break;
   case spawn_location::Right:
     pos = {SCENE_WIDTH + delay, rand() % SCENE_HEIGHT};
     vel = vec2::left;
+    sprite->flip = SDL_FLIP_NONE;
+    sprite->angle = 90.0;
     break;
   }
   speed = rand() % 3 + 2;
@@ -72,10 +80,4 @@ void RatHandler::update() {
     }
   }
  
-}
-
-void RatHandler::render(SDL_Rect camera) {
-  // for (auto rat : rats) {
-  //  rat->render(camera);
-  //}
 }

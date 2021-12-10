@@ -23,6 +23,7 @@ public:
   SDL_Rect get_dstrect() { return dstrect; }
 
   SDL_RendererFlip flip;
+  double angle;
   SDL_Texture *texture;
 
 private:
