@@ -5,8 +5,9 @@
 class Text {
 public:
   Text(const std::string &filepath, const std::string &text,
-       SDL_Renderer *renderer);
+       SDL_Renderer *renderer, int x, int y);
   SDL_Texture *get_texture();
+  SDL_Rect rect;
 
 private:
   SDL_Texture *texture;
