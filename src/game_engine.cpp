@@ -15,7 +15,7 @@ GameEngine::GameEngine()
     : window{nullptr}, renderer{nullptr}, background{nullptr},
       is_running{false}, player{nullptr},
       tile_handler{nullptr}, camera{0, 0, VIEW_WIDTH, VIEW_HEIGHT},
-      rain_emitter{nullptr}, is_paused{false}, is_started{true}, game_over{
+      rain_emitter{nullptr}, is_paused{false}, is_started{false}, game_over{
                                                                       false} {}
 
 GameEngine::~GameEngine() {}
@@ -85,7 +85,7 @@ void GameEngine::init() {
 }
 
 void GameEngine::handle_input() {
-  input_handler.handle(*player, is_running, is_paused);
+  input_handler.handle(*player, is_running, is_paused, is_started);
 }
 
 void GameEngine::update() {

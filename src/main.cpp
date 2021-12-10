@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
     engine->handle_input();
 
     engine->render();
-    if (!(engine->is_paused || engine->game_over)) {
+    if (!(engine->is_paused || engine->game_over || !engine->is_started)) {
       engine->update();
     }
 

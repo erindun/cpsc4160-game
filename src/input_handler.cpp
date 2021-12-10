@@ -8,9 +8,11 @@ InputHandler::~InputHandler() {}
 
 /// Input handler which implements velocity-based movement.
 /// This is what is used by default.
-void InputHandler::handle(Character &player, bool &is_running, bool &is_paused) {
+void InputHandler::handle(Character &player, bool &is_running, bool &is_paused,
+                          bool &is_started) {
   SDL_Event e;
   SDL_PollEvent(&e);
+
   switch (e.type) {
   case SDL_QUIT:
     is_running = false;
@@ -40,6 +42,10 @@ void InputHandler::handle(Character &player, bool &is_running, bool &is_paused) 
     case SDLK_RIGHT:
     case SDLK_d:
       player.velocity.x = 1;
+      break;
+
+    case SDLK_RETURN:
+      is_started = true;
       break;
     }
     break;
