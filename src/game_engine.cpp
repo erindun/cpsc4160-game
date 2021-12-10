@@ -15,7 +15,8 @@ GameEngine::GameEngine()
     : window{nullptr}, renderer{nullptr}, background{nullptr},
       is_running{false}, player{nullptr},
       tile_handler{nullptr}, camera{0, 0, VIEW_WIDTH, VIEW_HEIGHT},
-      rain_emitter{nullptr}, is_paused{false} {}
+      rain_emitter{nullptr}, is_paused{false}, is_started{true}, game_over{
+                                                                      false} {}
 
 GameEngine::~GameEngine() {}
 
@@ -88,6 +89,7 @@ void GameEngine::handle_input() {
 }
 
 void GameEngine::update() {
+  int remaining_lives = player->lives;
   for (auto obj : game_objects)
     obj->update();
 
@@ -97,9 +99,13 @@ void GameEngine::update() {
   camera.y = (player->position.y + CharacterSpriteHandler::FRAME_WIDTH / 2) -
              VIEW_HEIGHT / 2;
 
-  if (player->lives == 0) {
-    is_paused = true;
-    std::cout << "GAME OVER" << std::endl;
+  if (remaining_lives == 0) {
+    game_over = true;
+  }
+
+  if (remaining_lives != 0 && player->lives != remaining_lives) {
+    remaining_lives = player->lives;
+    ui_handler->update_score(remaining_lives);
   }
 
   // Clamp the camera within the screen.
@@ -127,8 +133,13 @@ void GameEngine::render() {
 
   ui_handler->render_score();
 
-  if (is_paused)
+  if (game_over)
+    ui_handler->render_end();
+  else if (!is_started)
+    ui_handler->render_start();
+  else if (is_paused)
     render_pause();
+
   SDL_RenderPresent(renderer);
 }
 

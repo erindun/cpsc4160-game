@@ -11,7 +11,7 @@ Character::Character(Sprite *sprite, Vec2 position,
                      CollisionHandler &collision_handler)
     : sprite{sprite}, position{position}, direction{vec2::down},
       velocity{vec2::zero}, state{CharacterState::idle},
-      collision_handler{collision_handler} {
+      collision_handler{collision_handler}, ui_handler{ui_handler} {
   sprite_handler = new CharacterSpriteHandler(sprite);
   collider = sprite->get_dstrect();
   lives = 9;
@@ -37,16 +37,17 @@ void Character::update() {
     }
   }
   bool collided = false;
-  if (collision_handler.detect_collisions(get_collider()) && ticks > last_collision + 1000) {
-      //velocity.x = -velocity.x;
-      //velocity.y = -velocity.y;
-      lives -= 1;
-      collided = true;
-      last_collision = ticks;
+  if (collision_handler.detect_collisions(get_collider()) &&
+      ticks > last_collision + 1000) {
+    // velocity.x = -velocity.x;
+    // velocity.y = -velocity.y;
+    lives--;
+    collided = true;
+    last_collision = ticks;
   }
   position += velocity * (MOVE_SPEED - dampen);
   sprite_handler->update(position, direction, state);
-  //if (collided) velocity = vec2::zero;
+  // if (collided) velocity = vec2::zero;
   collider = sprite->get_dstrect();
 }
 

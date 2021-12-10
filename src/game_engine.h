@@ -22,6 +22,9 @@ public:
   void quit();
   bool get_is_running();
   bool is_paused;
+  bool is_started;
+  bool is_running;
+  bool game_over;
   void render_pause();
 
 private:
@@ -30,7 +33,6 @@ private:
   SDL_Window *window;
   SDL_Renderer *renderer;
   SDL_Texture *background;
-  bool is_running;
   InputHandler input_handler;
   TileHandler *tile_handler;
   CollisionHandler collision_handler;

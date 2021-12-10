@@ -5,6 +5,7 @@
 #include "collision_handler.h"
 #include "game_object.h"
 #include "sprite.h"
+#include "ui_handler.h"
 #include "vec2.h"
 #include <SDL2/SDL.h>
 #include <string>
@@ -16,7 +17,8 @@ class Character : public Collidable {
 public:
   static const int MOVE_SPEED = 2;
 
-  Character(Sprite *sprite, vec2::Vec2 position, CollisionHandler &collision_handler);
+  Character(Sprite *sprite, vec2::Vec2 position,
+            CollisionHandler &collision_handler);
   ~Character();
 
   void update() override;
@@ -32,4 +34,5 @@ private:
   CharacterState state;
   CollisionHandler &collision_handler;
   int last_collision;
+  UIHandler *ui_handler;
 };
