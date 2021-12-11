@@ -6,8 +6,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
-find_package(sdl2-ttf CONFIG REQUIRED)
-include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
+find_package(SDL2_ttf REQUIRED)
+include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS})
 
 add_executable (my_game "src/main.cpp"
                      "src/game_engine.h"
@@ -30,4 +30,4 @@ add_executable (my_game "src/main.cpp"
                      "src/collision_handler.h"
                      "src/collidable.h" "src/collision_handler.cpp" "src/particle.h" "src/particle.cpp" "src/tree.h" "src/tree.cpp" "src/ui_handler.h" "src/ui_handler.cpp")
 
-target_link_libraries(my_game ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} SDL2::SDL2_ttf)
+	     target_link_libraries(my_game ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES})
