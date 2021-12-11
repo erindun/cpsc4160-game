@@ -5,7 +5,7 @@
 #include "vec2.h"
 #include <SDL.h>
 #include <list>
-#include "collision_handler.h";
+#include "collision_handler.h"
 
 enum spawn_location {Up, Down, Left, Right};
 
