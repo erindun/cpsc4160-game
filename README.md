@@ -22,3 +22,5 @@ make
 Please note that, due to hardcoded paths to the `assets` directory, the executable must be run inside the `build` folder.
 
 To clean rebuild the project, simply remove the `build` directory and repeat the above steps.
+
+BONUS: I made a little prototype for a very different type of game with these assets in Unity! You can check it on [itch.io](https://garrettdunc.itch.io/nico-prototype)!
